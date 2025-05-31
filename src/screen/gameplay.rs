@@ -34,6 +34,7 @@ fn spawn_gameplay_screen(
             anchor: Default::default(),
             image_mode: Default::default(),
         },
+        Transform::from_xyz(0., 0., 1.),
         Player {
             movement_direction: Vec3::default(),
         },
