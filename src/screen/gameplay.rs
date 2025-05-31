@@ -4,6 +4,7 @@ use crate::menu::Menu;
 use crate::prelude::*;
 use crate::screen::Screen;
 use crate::screen::ScreenRoot;
+use crate::core::camera::SmoothFollow;
 
 pub(super) fn plugin(app: &mut App) {
     app.add_systems(StateFlush, Screen::Gameplay.on_enter(spawn_gameplay_screen));
@@ -117,6 +118,7 @@ impl Configure for GameplayAction {
                     .in_set(UpdateSystems::RecordInput)
                     .run_if(action_pressed(Self::MoveDown)),
                 move_player.in_set(UpdateSystems::Update),
+                camera_follow_player.in_set(UpdateSystems::SyncEarly)
             )),
         );
     }
@@ -175,4 +177,15 @@ fn spawn_pause_overlay(mut commands: Commands) {
         DespawnOnExitState::<Screen>::default(),
         DespawnOnDisableState::<Menu>::default(),
     ));
+}
+
+fn camera_follow_player(
+    mut camera_query: Query<&mut SmoothFollow>,
+    player_query: Query<Entity, With<Player>>,
+) {
+    if let Ok(player) = player_query.single() {
+        if let Ok(mut follow) = camera_query.single_mut() {
+            follow.target = player;
+        }
+    }
 }

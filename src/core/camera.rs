@@ -45,8 +45,8 @@ impl FromWorld for CameraRoot {
 /// This component should only be used on root entities.
 #[derive(Component, Reflect)]
 #[reflect(Component)]
-struct SmoothFollow {
-    target: Entity,
+pub struct SmoothFollow {
+    pub(crate) target: Entity,
     rate: Vec2,
 }
 
