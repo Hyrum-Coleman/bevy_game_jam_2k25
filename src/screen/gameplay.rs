@@ -44,12 +44,30 @@ fn spawn_gameplay_screen(
         },
         DespawnOnExitState::<Screen>::Recursive,
     ));
+    commands.spawn((
+        Sprite {
+            image: assets.orc_sprite.clone(),
+            texture_atlas: None,
+            color: Default::default(),
+            flip_x: false,
+            flip_y: false,
+            custom_size: None,
+            rect: None,
+            anchor: Default::default(),
+            image_mode: Default::default(),
+        },
+        Orc,
+        DespawnOnExitState::<Screen>::Recursive,
+    ));
 }
 
 #[derive(Component)]
 struct Player {
     movement_direction: Vec3,
 }
+
+#[derive(Component)]
+struct Orc;
 
 #[derive(AssetCollection, Resource, Reflect, Default)]
 #[reflect(Resource)]
@@ -58,6 +76,8 @@ pub struct GameplayAssets {
     music: Handle<AudioSource>,
     #[asset(path = "image/Player.png")]
     character_sprite: Handle<Image>,
+    #[asset(path = "image/Orc_Guy.png")]
+    orc_sprite: Handle<Image>,
 }
 
 impl Configure for GameplayAssets {
