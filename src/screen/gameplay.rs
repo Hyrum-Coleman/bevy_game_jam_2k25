@@ -14,15 +14,10 @@ pub(super) fn plugin(app: &mut App) {
 
 fn spawn_gameplay_screen(
     mut commands: Commands,
-    screen_root: Res<ScreenRoot>,
+    _screen_root: Res<ScreenRoot>,
     audio_settings: Res<AudioSettings>,
     assets: Res<GameplayAssets>,
 ) {
-    commands
-        .entity(screen_root.ui)
-        .with_child(widget::column_center(children![widget::label(
-            "Gameplay goes here. Press P to pause!",
-        )]));
     commands.spawn((
         music_audio(&audio_settings, assets.music.clone()),
         DespawnOnExitState::<Screen>::Recursive,
