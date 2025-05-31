@@ -75,6 +75,8 @@ pub enum GameplayAction {
 
 const WALKING_SPEED: f32 = 1.0;
 
+const SPRINT_MULTIPLIER: f32 = 4.0;
+
 impl Configure for GameplayAction {
     fn configure(app: &mut App) {
         app.init_resource::<ActionState<Self>>();
@@ -100,38 +102,65 @@ impl Configure for GameplayAction {
                 Menu::clear
                     .in_set(UpdateSystems::RecordInput)
                     .run_if(Menu::is_enabled.and(action_just_pressed(Self::CloseMenu))),
-                move_player_right
+                walk_player_right
                     .in_set(UpdateSystems::RecordInput)
-                    .run_if(action_pressed(Self::MoveRight)),
-                move_player_left
+                    .run_if(action_pressed(Self::MoveRight).and(not(action_pressed(Self::Sprint)))),
+                walk_player_left
                     .in_set(UpdateSystems::RecordInput)
-                    .run_if(action_pressed(Self::MoveLeft)),
-                move_player_up
+                    .run_if(action_pressed(Self::MoveLeft).and(not(action_pressed(Self::Sprint)))),
+                walk_player_up
                     .in_set(UpdateSystems::RecordInput)
-                    .run_if(action_pressed(Self::MoveUp)),
-                move_player_down
+                    .run_if(action_pressed(Self::MoveUp).and(not(action_pressed(Self::Sprint)))),
+                walk_player_down
                     .in_set(UpdateSystems::RecordInput)
-                    .run_if(action_pressed(Self::MoveDown)),
-                
+                    .run_if(action_pressed(Self::MoveDown).and(not(action_pressed(Self::Sprint)))),
+                sprint_player_right
+                    .in_set(UpdateSystems::RecordInput)
+                    .run_if(action_pressed(Self::MoveRight).and(action_pressed(Self::Sprint))),
+                sprint_player_left
+                    .in_set(UpdateSystems::RecordInput)
+                    .run_if(action_pressed(Self::MoveLeft).and(action_pressed(Self::Sprint))),
+                sprint_player_up
+                    .in_set(UpdateSystems::RecordInput)
+                    .run_if(action_pressed(Self::MoveUp).and(action_pressed(Self::Sprint))),
+                sprint_player_down
+                    .in_set(UpdateSystems::RecordInput)
+                    .run_if(action_pressed(Self::MoveDown).and(action_pressed(Self::Sprint))),
             )),
         );
     }
 }
 
-fn move_player_right(query: Query<&mut Transform, With<Player>>) {
+fn walk_player_right(query: Query<&mut Transform, With<Player>>) {
     move_player(query, vec3(WALKING_SPEED, 0.0, 0.0));
 }
 
-fn move_player_left(query: Query<&mut Transform, With<Player>>) {
+fn walk_player_left(query: Query<&mut Transform, With<Player>>) {
     move_player(query, vec3(-WALKING_SPEED, 0.0, 0.0));
 }
 
-fn move_player_up(query: Query<&mut Transform, With<Player>>) {
+fn walk_player_up(query: Query<&mut Transform, With<Player>>) {
     move_player(query, vec3(0.0, WALKING_SPEED, 0.0));
 }
 
-fn move_player_down(query: Query<&mut Transform, With<Player>>) {
+fn walk_player_down(query: Query<&mut Transform, With<Player>>) {
     move_player(query, vec3(0.0, -WALKING_SPEED, 0.0));
+}
+
+fn sprint_player_right(query: Query<&mut Transform, With<Player>>) {
+    move_player(query, vec3(WALKING_SPEED*SPRINT_MULTIPLIER, 0.0, 0.0));
+}
+
+fn sprint_player_left(query: Query<&mut Transform, With<Player>>) {
+    move_player(query, vec3(-WALKING_SPEED*SPRINT_MULTIPLIER, 0.0, 0.0));
+}
+
+fn sprint_player_up(query: Query<&mut Transform, With<Player>>) {
+    move_player(query, vec3(0.0, WALKING_SPEED*SPRINT_MULTIPLIER, 0.0));
+}
+
+fn sprint_player_down(query: Query<&mut Transform, With<Player>>) {
+    move_player(query, vec3(0.0, -WALKING_SPEED*SPRINT_MULTIPLIER, 0.0));
 }
 
 fn move_player(mut query: Query<&mut Transform, With<Player>>, direction: Vec3) {
