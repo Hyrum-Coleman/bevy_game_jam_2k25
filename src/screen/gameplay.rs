@@ -92,7 +92,7 @@ pub enum GameplayAction {
     MoveDown,
 }
 
-const WALKING_SPEED: f32 = 1.0;
+const WALKING_SPEED: f32 = 75.0;
 
 const SPRINT_MULTIPLIER: f32 = 4.0;
 
