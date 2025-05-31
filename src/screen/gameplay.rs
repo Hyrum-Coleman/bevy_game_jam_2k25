@@ -94,7 +94,7 @@ pub enum GameplayAction {
 
 const WALKING_SPEED: f32 = 75.0;
 
-const SPRINT_MULTIPLIER: f32 = 4.0;
+const SPRINT_MULTIPLIER: f32 = 2.0;
 
 impl Configure for GameplayAction {
     fn configure(app: &mut App) {
