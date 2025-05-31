@@ -34,7 +34,7 @@ fn spawn_title_screen(
 #[derive(AssetCollection, Resource, Reflect, Default)]
 #[reflect(Resource)]
 pub struct TitleAssets {
-    #[asset(path = "audio/music/240376__edtijo__happy-8bit-pixel-adenture.ogg")]
+    #[asset(path = "audio/music/Marimba_Duet.ogg")]
     music: Handle<AudioSource>,
 }
 
