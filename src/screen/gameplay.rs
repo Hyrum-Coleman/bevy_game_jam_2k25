@@ -38,13 +38,17 @@ fn spawn_gameplay_screen(
             anchor: Default::default(),
             image_mode: Default::default(),
         },
-        Player,
+        Player {
+            movement_direction: Vec3::default(),
+        },
         DespawnOnExitState::<Screen>::Recursive,
     ));
 }
 
 #[derive(Component)]
-struct Player;
+struct Player {
+    movement_direction: Vec3,
+}
 
 #[derive(AssetCollection, Resource, Reflect, Default)]
 #[reflect(Resource)]
@@ -70,7 +74,6 @@ pub enum GameplayAction {
     MoveRight,
     MoveUp,
     MoveDown,
-    Sprint,
 }
 
 const WALKING_SPEED: f32 = 1.0;
@@ -89,8 +92,7 @@ impl Configure for GameplayAction {
                 .with(Self::MoveUp, KeyCode::KeyW)
                 .with(Self::MoveLeft, KeyCode::KeyA)
                 .with(Self::MoveDown, KeyCode::KeyS)
-                .with(Self::MoveRight, KeyCode::KeyD)
-                .with(Self::Sprint, KeyCode::ShiftLeft),
+                .with(Self::MoveRight, KeyCode::KeyD),
         );
         app.add_plugins(InputManagerPlugin::<Self>::default());
         app.add_systems(
@@ -102,71 +104,68 @@ impl Configure for GameplayAction {
                 Menu::clear
                     .in_set(UpdateSystems::RecordInput)
                     .run_if(Menu::is_enabled.and(action_just_pressed(Self::CloseMenu))),
-                walk_player_right
+                prep_move_right
                     .in_set(UpdateSystems::RecordInput)
-                    .run_if(action_pressed(Self::MoveRight).and(not(action_pressed(Self::Sprint)))),
-                walk_player_left
+                    .run_if(action_pressed(Self::MoveRight)),
+                prep_move_left
                     .in_set(UpdateSystems::RecordInput)
-                    .run_if(action_pressed(Self::MoveLeft).and(not(action_pressed(Self::Sprint)))),
-                walk_player_up
+                    .run_if(action_pressed(Self::MoveLeft)),
+                prep_move_up
                     .in_set(UpdateSystems::RecordInput)
-                    .run_if(action_pressed(Self::MoveUp).and(not(action_pressed(Self::Sprint)))),
-                walk_player_down
+                    .run_if(action_pressed(Self::MoveUp)),
+                prep_move_down
                     .in_set(UpdateSystems::RecordInput)
-                    .run_if(action_pressed(Self::MoveDown).and(not(action_pressed(Self::Sprint)))),
-                sprint_player_right
-                    .in_set(UpdateSystems::RecordInput)
-                    .run_if(action_pressed(Self::MoveRight).and(action_pressed(Self::Sprint))),
-                sprint_player_left
-                    .in_set(UpdateSystems::RecordInput)
-                    .run_if(action_pressed(Self::MoveLeft).and(action_pressed(Self::Sprint))),
-                sprint_player_up
-                    .in_set(UpdateSystems::RecordInput)
-                    .run_if(action_pressed(Self::MoveUp).and(action_pressed(Self::Sprint))),
-                sprint_player_down
-                    .in_set(UpdateSystems::RecordInput)
-                    .run_if(action_pressed(Self::MoveDown).and(action_pressed(Self::Sprint))),
+                    .run_if(action_pressed(Self::MoveDown)),
+                move_player.in_set(UpdateSystems::Update),
             )),
         );
     }
 }
 
-fn walk_player_right(query: Query<&mut Transform, With<Player>>) {
-    move_player(query, vec3(WALKING_SPEED, 0.0, 0.0));
+fn prep_move_right(query: Query<&mut Player>) {
+    prep_move(query, Vec3::X * 1.0);
 }
 
-fn walk_player_left(query: Query<&mut Transform, With<Player>>) {
-    move_player(query, vec3(-WALKING_SPEED, 0.0, 0.0));
+fn prep_move_left(query: Query<&mut Player>) {
+    prep_move(query, Vec3::X * -1.0);
 }
 
-fn walk_player_up(query: Query<&mut Transform, With<Player>>) {
-    move_player(query, vec3(0.0, WALKING_SPEED, 0.0));
+fn prep_move_up(query: Query<&mut Player>) {
+    prep_move(query, Vec3::Y * 1.0);
 }
 
-fn walk_player_down(query: Query<&mut Transform, With<Player>>) {
-    move_player(query, vec3(0.0, -WALKING_SPEED, 0.0));
+fn prep_move_down(query: Query<&mut Player>) {
+    prep_move(query, Vec3::Y * -1.0);
 }
 
-fn sprint_player_right(query: Query<&mut Transform, With<Player>>) {
-    move_player(query, vec3(WALKING_SPEED*SPRINT_MULTIPLIER, 0.0, 0.0));
+fn prep_move(mut query: Query<&mut Player>, direction: Vec3) {
+    if let Ok(mut player) = query.single_mut() {
+        player.movement_direction += direction;
+    } else {
+        warn!("Player not found");
+    }
 }
 
-fn sprint_player_left(query: Query<&mut Transform, With<Player>>) {
-    move_player(query, vec3(-WALKING_SPEED*SPRINT_MULTIPLIER, 0.0, 0.0));
-}
-
-fn sprint_player_up(query: Query<&mut Transform, With<Player>>) {
-    move_player(query, vec3(0.0, WALKING_SPEED*SPRINT_MULTIPLIER, 0.0));
-}
-
-fn sprint_player_down(query: Query<&mut Transform, With<Player>>) {
-    move_player(query, vec3(0.0, -WALKING_SPEED*SPRINT_MULTIPLIER, 0.0));
-}
-
-fn move_player(mut query: Query<&mut Transform, With<Player>>, direction: Vec3) {
-    query.iter_mut().for_each(|mut transform| {
-        transform.translation += direction;
+fn move_player(
+    mut player_query: Query<&mut Player>,
+    mut transform_query: Query<&mut Transform, With<Player>>,
+    keys: Res<ButtonInput<KeyCode>>,
+) {
+    transform_query.iter_mut().for_each(|mut transform| {
+        if let Ok(mut player) = player_query.single_mut() {
+            let direction = player.movement_direction.normalize_or_zero() * calculate_speed(&keys);
+            transform.translation += direction;
+            player.movement_direction = Vec3::ZERO;
+        }
     })
+}
+
+fn calculate_speed(keys: &Res<ButtonInput<KeyCode>>) -> f32 {
+    if keys.pressed(KeyCode::ShiftLeft) {
+        WALKING_SPEED * SPRINT_MULTIPLIER
+    } else {
+        WALKING_SPEED
+    }
 }
 
 fn spawn_pause_overlay(mut commands: Commands) {
