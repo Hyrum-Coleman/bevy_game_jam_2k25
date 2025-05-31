@@ -31,7 +31,7 @@ fn spawn_gameplay_screen(
 #[derive(AssetCollection, Resource, Reflect, Default)]
 #[reflect(Resource)]
 pub struct GameplayAssets {
-    #[asset(path = "audio/music/545458__bertsz__bit-forest-evil-theme-music.ogg")]
+    #[asset(path = "audio/music/summer_mp3.mp3")]
     music: Handle<AudioSource>,
 }
 
