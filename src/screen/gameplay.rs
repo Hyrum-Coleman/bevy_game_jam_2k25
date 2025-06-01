@@ -43,14 +43,7 @@ fn spawn_gameplay_screen(
     commands.spawn((
         Sprite {
             image: assets.orc_sprite.clone(),
-            texture_atlas: None,
-            color: Default::default(),
-            flip_x: false,
-            flip_y: false,
-            custom_size: None,
-            rect: None,
-            anchor: Default::default(),
-            image_mode: Default::default(),
+            ..default()
         },
         Orc,
         DespawnOnExitState::<Screen>::Recursive,
