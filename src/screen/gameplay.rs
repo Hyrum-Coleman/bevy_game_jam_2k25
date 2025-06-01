@@ -94,7 +94,10 @@ pub enum GameplayAction {
 }
 
 // Walking Speed is in ft/s (1ft=12px)
-const WALKING_SPEED: f32 = 7.0;
+const WALKING_SPEED_FEET_PER_SECOND: f32 = 7.0;
+
+const WALKING_SPEED_PIXELS_PER_SECOND: f32 = 12.0*WALKING_SPEED_FEET_PER_SECOND;
+
 
 const SPRINT_MULTIPLIER: f32 = 2.0;
 
@@ -173,7 +176,7 @@ fn move_player(
 ) {
     transform_query.iter_mut().for_each(|mut transform| {
         if let Ok(mut player) = player_query.single_mut() {
-            let direction = player.movement_direction.normalize_or_zero() * calculate_speed(&keys) * time.delta_secs() * 12.0;
+            let direction = player.movement_direction.normalize_or_zero() * calculate_speed(&keys) * time.delta_secs();
 
             if direction == Vec3::ZERO {
                 return;
@@ -188,9 +191,9 @@ fn move_player(
 
 fn calculate_speed(keys: &Res<ButtonInput<KeyCode>>) -> f32 {
     if keys.pressed(KeyCode::ShiftLeft) {
-        WALKING_SPEED * SPRINT_MULTIPLIER
+        WALKING_SPEED_PIXELS_PER_SECOND * SPRINT_MULTIPLIER
     } else {
-        WALKING_SPEED
+        WALKING_SPEED_PIXELS_PER_SECOND
     }
 }
 
