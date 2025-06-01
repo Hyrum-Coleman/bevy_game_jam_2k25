@@ -44,6 +44,7 @@ fn spawn_gameplay_screen(
                     Transform::from_xyz(pos.x, pos.y, 1.0),
                     Collider::rectangle(TILE_SIZE, TILE_SIZE),
                     RigidBody::Static,
+                    DespawnOnExitState::<Screen>::Recursive,
                 ));
             };
         }
