@@ -201,10 +201,10 @@ fn prep_move(mut query: Query<&mut Player>, direction: Vec3) {
 
 fn move_player(
     mut player_query: Query<&mut Player>,
-    mut transform_query: Query<&mut LinearVelocity, With<Player>>,
+    mut transform_query: Query<(&mut LinearVelocity, &mut Transform), With<Player>>,
     keys: Res<ButtonInput<KeyCode>>,
 ) {
-    transform_query.iter_mut().for_each(|mut velocity| {
+    transform_query.iter_mut().for_each(|(mut velocity, mut transform)| {
         if let Ok(mut player) = player_query.single_mut() {
             let direction = player.movement_direction.normalize_or_zero() * calculate_speed(&keys);
 
