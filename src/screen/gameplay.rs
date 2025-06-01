@@ -70,6 +70,7 @@ fn spawn_gameplay_screen(
         Transform::from_xyz(128., 128., 1.),
         Player {
             movement_direction: Vec3::default(),
+            orientation: Direction::Left,
         },
         RigidBody::Dynamic,
         Collider::rectangle(32.0, 64.0),
@@ -88,10 +89,18 @@ fn spawn_gameplay_screen(
 #[derive(Component)]
 struct Player {
     movement_direction: Vec3,
+    orientation: Direction,
 }
 
 #[derive(Component)]
 struct Orc;
+
+enum Direction{
+    Left,
+    Right,
+    Up,
+    Down
+}
 
 #[derive(AssetCollection, Resource, Reflect, Default)]
 #[reflect(Resource)]
@@ -170,6 +179,7 @@ impl Configure for GameplayAction {
                     .run_if(action_pressed(Self::MoveDown)),
                 move_player.in_set(UpdateSystems::Update),
                 camera_follow_player.in_set(UpdateSystems::SyncEarly),
+                reset_speed_and_orientation.in_set(UpdateSystems::Update),
             )),
         );
     }
@@ -201,10 +211,10 @@ fn prep_move(mut query: Query<&mut Player>, direction: Vec3) {
 
 fn move_player(
     mut player_query: Query<&mut Player>,
-    mut transform_query: Query<(&mut LinearVelocity, &mut Transform), With<Player>>,
+    mut transform_query: Query<(&mut LinearVelocity, &mut AngularVelocity), With<Player>>,
     keys: Res<ButtonInput<KeyCode>>,
 ) {
-    transform_query.iter_mut().for_each(|(mut velocity, mut transform)| {
+    transform_query.iter_mut().for_each(|(mut velocity, mut angular_velocity)| {
         if let Ok(mut player) = player_query.single_mut() {
             let direction = player.movement_direction.normalize_or_zero() * calculate_speed(&keys);
 
@@ -215,14 +225,37 @@ fn move_player(
             velocity.x = direction.x;
             velocity.y = direction.y;
             let orientation= match direction.x.partial_cmp(&0.0).unwrap(){
-                std::cmp::Ordering::Less => 0.0,
-                std::cmp::Ordering::Equal => 0.0,
-                std::cmp::Ordering::Greater => f32::consts::PI,
+                std::cmp::Ordering::Less => Direction::Left,
+                std::cmp::Ordering::Equal => match direction.y.partial_cmp(&0.0).unwrap(){
+                    std::cmp::Ordering::Less => Direction::Down,
+                    std::cmp::Ordering::Equal => Direction::Left,
+                    std::cmp::Ordering::Greater => Direction::Up,
+                },
+                std::cmp::Ordering::Greater => Direction::Right,
             };
-            transform.rotation = Quat::from_axis_angle(Vec3::Y, orientation);
+            player.orientation=orientation;
+            angular_velocity.0=0.0;
             player.movement_direction = Vec3::ZERO;
         }
     })
+}
+
+fn reset_speed_and_orientation(
+    player_query: Query<&Player>,
+    mut transform_query: Query<(&mut LinearVelocity,&mut Transform), With<Player>>
+) {
+    let player= player_query.single().expect("Player does not exist");
+    transform_query.iter_mut().for_each(|(mut velocity,mut transform)| {
+        velocity.x = 0.0;
+        velocity.y = 0.0;
+        let angle=match player.orientation{
+            Direction::Left => 0.0,
+            Direction::Right => f32::consts::PI,
+            Direction::Up => 0.0,
+            Direction::Down => 0.0,
+        };
+        transform.rotation = Quat::from_axis_angle(Vec3::Y, angle);
+    });
 }
 
 fn calculate_speed(keys: &Res<ButtonInput<KeyCode>>) -> f32 {
