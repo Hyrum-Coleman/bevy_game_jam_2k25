@@ -1,10 +1,10 @@
-use crate::core::audio::AudioSettings;
 use crate::core::audio::music_audio;
+use crate::core::audio::AudioSettings;
+use crate::core::camera::SmoothFollow;
 use crate::menu::Menu;
 use crate::prelude::*;
 use crate::screen::Screen;
 use crate::screen::ScreenRoot;
-use crate::core::camera::SmoothFollow;
 
 pub(super) fn plugin(app: &mut App) {
     app.add_systems(StateFlush, Screen::Gameplay.on_enter(spawn_gameplay_screen));
