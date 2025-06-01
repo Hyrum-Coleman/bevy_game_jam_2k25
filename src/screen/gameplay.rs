@@ -93,7 +93,8 @@ pub enum GameplayAction {
     MoveDown,
 }
 
-const WALKING_SPEED: f32 = 75.0;
+// Walking Speed is in ft/s (1ft=12px)
+const WALKING_SPEED: f32 = 7.0;
 
 const SPRINT_MULTIPLIER: f32 = 2.0;
 
@@ -172,7 +173,7 @@ fn move_player(
 ) {
     transform_query.iter_mut().for_each(|mut transform| {
         if let Ok(mut player) = player_query.single_mut() {
-            let direction = player.movement_direction.normalize_or_zero() * calculate_speed(&keys) * time.delta_secs();
+            let direction = player.movement_direction.normalize_or_zero() * calculate_speed(&keys) * time.delta_secs() * 12.0;
 
             if direction == Vec3::ZERO {
                 return;
