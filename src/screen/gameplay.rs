@@ -24,15 +24,22 @@ fn spawn_gameplay_screen(
     ));
     commands.spawn((
         Sprite {
+            image: assets.tile_sprite.clone(),
+            custom_size: Some(Vec2::splat(256.)),
+            image_mode: SpriteImageMode::Tiled {
+                tile_x: true,
+                tile_y: true,
+                stretch_value: 1.0,
+            },
+            ..default()
+        },
+        Transform::from_xyz(0., 0., -5.),
+        DespawnOnExitState::<Screen>::Recursive
+        ));
+    commands.spawn((
+        Sprite {
             image: assets.character_sprite.clone(),
-            texture_atlas: None,
-            color: Default::default(),
-            flip_x: false,
-            flip_y: false,
-            custom_size: None,
-            rect: None,
-            anchor: Default::default(),
-            image_mode: Default::default(),
+            ..default()
         },
         Transform::from_xyz(0., 0., 1.),
         Player {
@@ -63,6 +70,8 @@ struct Orc;
 pub struct GameplayAssets {
     #[asset(path = "audio/music/summer.ogg")]
     music: Handle<AudioSource>,
+    #[asset(path = "image/tile.png")]
+    tile_sprite: Handle<Image>,
     #[asset(path = "image/Player.png")]
     character_sprite: Handle<Image>,
     #[asset(path = "image/Orc_Guy.png")]
@@ -131,7 +140,7 @@ impl Configure for GameplayAction {
                     .in_set(UpdateSystems::RecordInput)
                     .run_if(action_pressed(Self::MoveDown)),
                 move_player.in_set(UpdateSystems::Update),
-                camera_follow_player.in_set(UpdateSystems::SyncEarly)
+                camera_follow_player.in_set(UpdateSystems::SyncEarly),
             )),
         );
     }
