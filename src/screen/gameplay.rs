@@ -169,7 +169,9 @@ fn move_player(
 ) {
     transform_query.iter_mut().for_each(|mut transform| {
         if let Ok(mut player) = player_query.single_mut() {
-            let direction = player.movement_direction.normalize_or_zero() * calculate_speed(&keys) * time.delta_secs();
+            let direction = player.movement_direction.normalize_or_zero()
+                * calculate_speed(&keys)
+                * time.delta_secs();
 
             if direction == Vec3::ZERO {
                 return;
