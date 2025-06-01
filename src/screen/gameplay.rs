@@ -71,11 +71,11 @@ fn spawn_gameplay_screen(
         Transform::from_xyz(128., 128., 1.),
         Player {
             movement_direction: Vec3::default(),
-            orientation: Direction::Left,
         },
         RigidBody::Dynamic,
         Collider::rectangle(32.0, 64.0),
         DespawnOnExitState::<Screen>::Recursive,
+        LockedAxes::ROTATION_LOCKED,
     ));
     commands.spawn((
         Sprite {
@@ -90,18 +90,10 @@ fn spawn_gameplay_screen(
 #[derive(Component)]
 struct Player {
     movement_direction: Vec3,
-    orientation: Direction,
 }
 
 #[derive(Component)]
 struct Orc;
-
-enum Direction{
-    Left,
-    Right,
-    Up,
-    Down
-}
 
 #[derive(AssetCollection, Resource, Reflect, Default)]
 #[reflect(Resource)]
@@ -142,6 +134,10 @@ const WALKING_SPEED_PIXELS_PER_SECOND: f32 = 12.0 * WALKING_SPEED_FEET_PER_SECON
 
 const SPRINT_MULTIPLIER: f32 = 2.0;
 
+//ft/s^2
+const DEACCELERATION_RATE_FEET: f32 = 50.0;
+const DEACCELERATION_RATE_PIXELS: f32 = DEACCELERATION_RATE_FEET * 12.0;
+
 impl Configure for GameplayAction {
     fn configure(app: &mut App) {
         app.init_resource::<ActionState<Self>>();
@@ -180,7 +176,11 @@ impl Configure for GameplayAction {
                     .run_if(action_pressed(Self::MoveDown)),
                 move_player.in_set(UpdateSystems::Update),
                 camera_follow_player.in_set(UpdateSystems::SyncEarly),
-                reset_speed_and_orientation.in_set(UpdateSystems::Update),
+                slow_speed.in_set(UpdateSystems::Update).run_if(
+                    action_pressed(Self::MoveDown).nand(action_pressed(Self::MoveUp).nand(
+                        action_pressed(Self::MoveLeft).nand(action_pressed(Self::MoveRight)),
+                    )),
+                ),
             )),
         );
     }
@@ -212,11 +212,13 @@ fn prep_move(mut query: Query<&mut Player>, direction: Vec3) {
 
 fn move_player(
     mut player_query: Query<&mut Player>,
-    mut transform_query: Query<(&mut LinearVelocity, &mut AngularVelocity), With<Player>>,
+    mut transform_query: Query<(&mut LinearVelocity, &mut Sprite), With<Player>>,
     keys: Res<ButtonInput<KeyCode>>,
 ) {
-    transform_query.iter_mut().for_each(|(mut velocity, mut angular_velocity)| {
-        if let Ok(mut player) = player_query.single_mut() {
+    transform_query
+        .iter_mut()
+        .for_each(|(mut velocity, mut sprite)| {
+            let mut player = rq!(player_query.single_mut());
             let direction = player.movement_direction.normalize_or_zero() * calculate_speed(&keys);
 
             if direction == Vec3::ZERO {
@@ -225,37 +227,32 @@ fn move_player(
 
             velocity.x = direction.x;
             velocity.y = direction.y;
-            let orientation= match direction.x.partial_cmp(&0.0).unwrap(){
-                std::cmp::Ordering::Less => Direction::Left,
-                std::cmp::Ordering::Equal => match direction.y.partial_cmp(&0.0).unwrap(){
-                    std::cmp::Ordering::Less => Direction::Down,
-                    std::cmp::Ordering::Equal => Direction::Left,
-                    std::cmp::Ordering::Greater => Direction::Up,
-                },
-                std::cmp::Ordering::Greater => Direction::Right,
+            let flip = match direction.x.partial_cmp(&0.0).unwrap() {
+                std::cmp::Ordering::Less => false,
+                std::cmp::Ordering::Equal => false,
+                std::cmp::Ordering::Greater => true,
             };
-            player.orientation=orientation;
-            angular_velocity.0=0.0;
+            sprite.flip_x = flip;
             player.movement_direction = Vec3::ZERO;
-        }
-    })
+        })
 }
 
-fn reset_speed_and_orientation(
-    player_query: Query<&Player>,
-    mut transform_query: Query<(&mut LinearVelocity,&mut Transform), With<Player>>
-) {
-    let player= player_query.single().expect("Player does not exist");
-    transform_query.iter_mut().for_each(|(mut velocity,mut transform)| {
-        velocity.x = 0.0;
-        velocity.y = 0.0;
-        let angle=match player.orientation{
-            Direction::Left => 0.0,
-            Direction::Right => f32::consts::PI,
-            Direction::Up => 0.0,
-            Direction::Down => 0.0,
-        };
-        transform.rotation = Quat::from_axis_angle(Vec3::Y, angle);
+fn slow_speed(mut transform_query: Query<&mut LinearVelocity, With<Player>>, time: Res<Time>) {
+    transform_query.iter_mut().for_each(|mut velocity| {
+        if velocity.x != 0.0 {
+            let sign_x = velocity.x.signum();
+            velocity.x -= DEACCELERATION_RATE_PIXELS * time.delta_secs() * sign_x;
+            if velocity.x.signum() != sign_x {
+                velocity.x = 0.0
+            }
+        }
+        if velocity.y != 0.0 {
+            let sign_y = velocity.y.signum();
+            velocity.y -= DEACCELERATION_RATE_PIXELS * time.delta_secs() * sign_y;
+            if velocity.y.signum() != sign_y {
+                velocity.y = 0.0
+            }
+        }
     });
 }
 
