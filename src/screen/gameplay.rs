@@ -25,7 +25,7 @@ fn spawn_gameplay_screen(
     commands.spawn((
         Sprite {
             image: assets.tile_sprite.clone(),
-            custom_size: Some(Vec2::splat(256.)),
+            custom_size: Some(Vec2::splat(2560.)),
             image_mode: SpriteImageMode::Tiled {
                 tile_x: true,
                 tile_y: true,
