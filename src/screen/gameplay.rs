@@ -1,3 +1,5 @@
+use core::f32;
+
 use crate::core::audio::music_audio;
 use crate::core::audio::AudioSettings;
 use crate::core::camera::SmoothFollow;
@@ -188,6 +190,12 @@ fn move_player(
 
             transform.translation += direction;
             info!("Moved player to {}", transform.translation);
+            let orientation= match direction.x.partial_cmp(&0.0).unwrap(){
+                std::cmp::Ordering::Less => 0.0,
+                std::cmp::Ordering::Equal => 0.0,
+                std::cmp::Ordering::Greater => f32::consts::PI,
+            };
+            transform.rotation = Quat::from_axis_angle(Vec3::Y, orientation);
             player.movement_direction = Vec3::ZERO;
         }
     })
