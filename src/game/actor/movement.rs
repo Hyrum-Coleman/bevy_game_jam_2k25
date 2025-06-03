@@ -4,7 +4,7 @@ use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
     app.configure::<(Movement, MovementController)>();
-    app.add_plugins((input::plugin));
+    app.add_plugins(input::plugin);
 }
 
 // Walking Speed is in ft/s (1ft=12px)
@@ -12,7 +12,7 @@ pub(crate) const WALKING_SPEED_FEET_PER_SECOND: f32 = 7.0;
 
 pub(crate) const WALKING_SPEED_PIXELS_PER_SECOND: f32 = 12.0 * WALKING_SPEED_FEET_PER_SECOND;
 
-pub(crate) const SPRINT_MULTIPLIER: f32 = 2.0;
+pub(crate) const _SPRINT_MULTIPLIER: f32 = 2.0;
 
 //ft/s^2
 pub(crate) const DEACCELERATION_RATE_FEET: f32 = 50.0;

@@ -39,7 +39,7 @@ impl Configure for Level {
 
 pub fn spawn_world(
     mut commands: Commands,
-    world: NextRef<Level>,
+    _world: NextRef<Level>,
     world_assets: Res<WorldAssets>,
     actor_assets: Res<ActorAssets>,
 ) {

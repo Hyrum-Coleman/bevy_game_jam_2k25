@@ -2,7 +2,6 @@ use crate::core::camera::CameraRoot;
 use crate::core::window::WindowRoot;
 use crate::game::actor::player::Player;
 use crate::prelude::*;
-use crate::screen::gameplay::GameplayAssets;
 
 pub(super) fn plugin(app: &mut App) {
     app.configure::<(Facing, FacePlayer)>();
