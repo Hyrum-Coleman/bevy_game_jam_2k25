@@ -5,6 +5,7 @@
 
 mod animation;
 mod core;
+mod game;
 mod menu;
 mod prelude;
 mod screen;
@@ -22,6 +23,7 @@ pub fn plugin(app: &mut App) {
         animation::plugin,
         menu::plugin,
         screen::plugin,
+        game::plugin,
         theme::plugin,
         util::plugin,
     ));

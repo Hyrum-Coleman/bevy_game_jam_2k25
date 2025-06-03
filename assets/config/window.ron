@@ -1,5 +1,5 @@
 (
     title: "Bevy Game Jam 2k25",
-    window_mode: BorderlessFullscreen(Current),
+    window_mode: Windowed,
     present_mode: AutoVsync,
 )

@@ -1,5 +1,5 @@
 pub mod fade;
-mod gameplay;
+pub mod gameplay;
 mod loading;
 mod splash;
 mod title;
@@ -9,6 +9,7 @@ use bevy::ecs::system::ScheduleSystem;
 
 use crate::core::camera::CameraRoot;
 use crate::core::window::WindowReady;
+use crate::game::world::Level;
 use crate::menu::Menu;
 use crate::prelude::*;
 use crate::theme::widget::IsLoadingBarFill;
@@ -50,7 +51,13 @@ impl FromWorld for ScreenRoot {
 #[derive(
     State, Copy, Clone, Default, Eq, PartialEq, Hash, Debug, Reflect, Serialize, Deserialize,
 )]
-#[state(after(WindowReady), before(Menu, Pause), react, bevy_state, log_flush)]
+#[state(
+    after(WindowReady),
+    before(Menu, Pause, Level),
+    react,
+    bevy_state,
+    log_flush
+)]
 pub enum Screen {
     #[default]
     Splash,
