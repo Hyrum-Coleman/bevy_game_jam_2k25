@@ -7,17 +7,6 @@ pub(super) fn plugin(app: &mut App) {
     app.add_plugins(input::plugin);
 }
 
-// Walking Speed is in ft/s (1ft=12px)
-pub(crate) const WALKING_SPEED_FEET_PER_SECOND: f32 = 7.0;
-
-pub(crate) const WALKING_SPEED_PIXELS_PER_SECOND: f32 = 12.0 * WALKING_SPEED_FEET_PER_SECOND;
-
-pub(crate) const _SPRINT_MULTIPLIER: f32 = 2.0;
-
-//ft/s^2
-pub(crate) const DECELERATION_RATE_FEET: f32 = 50.0;
-pub(crate) const DECELERATION_RATE_PIXELS: f32 = DECELERATION_RATE_FEET * 12.0;
-
 #[derive(Component, Reflect, Serialize, Deserialize, Copy, Clone, Default)]
 #[reflect(Component)]
 #[serde(default)]
@@ -59,19 +48,16 @@ fn apply_movement(
 
     for (movement, mut controller, mut velocity) in &mut movement_query {
         if controller.0 == Vec2::ZERO || velocity.0.length_squared() >= movement.speed.powi(2) {
-            // Apply deceleration
-            velocity.0 *= movement.decel.powf(dt);
-
             if velocity.x != 0.0 {
                 let sign_x = velocity.x.signum();
-                velocity.x -= DECELERATION_RATE_PIXELS * time.delta_secs() * sign_x;
+                velocity.x -= movement.decel * time.delta_secs() * sign_x;
                 if velocity.x.signum() != sign_x {
                     velocity.x = 0.0
                 }
             }
             if velocity.y != 0.0 {
                 let sign_y = velocity.y.signum();
-                velocity.y -= DECELERATION_RATE_PIXELS * time.delta_secs() * sign_y;
+                velocity.y -= movement.decel * time.delta_secs() * sign_y;
                 if velocity.y.signum() != sign_y {
                     velocity.y = 0.0
                 }

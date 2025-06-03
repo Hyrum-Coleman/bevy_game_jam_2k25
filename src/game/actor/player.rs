@@ -2,9 +2,7 @@ use super::movement::input::MovementAction;
 use crate::game::GameLayer;
 use crate::game::actor::camera_cutie::CameraCutie;
 use crate::game::actor::create_entity_sprite;
-use crate::game::actor::movement::{
-    DECELERATION_RATE_PIXELS, Movement, MovementController, WALKING_SPEED_PIXELS_PER_SECOND,
-};
+use crate::game::actor::movement::{Movement, MovementController};
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
@@ -21,12 +19,27 @@ impl Configure for Player {
     }
 }
 
+
+// Walking Speed is in ft/s (1ft=12px)
+const WALKING_SPEED_FEET_PER_SECOND: f32 = 7.0;
+
+const WALKING_SPEED_PIXELS_PER_SECOND: f32 = 12.0 * WALKING_SPEED_FEET_PER_SECOND;
+
+const _SPRINT_MULTIPLIER: f32 = 2.0;
+
+//ft/s^2
+const ACCELERATION_RATE_FEET: f32 = 100.0;
+const ACCELERATION_RATE_PIXELS: f32 = ACCELERATION_RATE_FEET * 12.0;
+const DECELERATION_RATE_FEET: f32 = 50.0;
+const DECELERATION_RATE_PIXELS: f32 = DECELERATION_RATE_FEET * 12.0;
+
+
 pub fn get_player(texture: Handle<Image>) -> impl Bundle {
     (
         Name::new("Player"),
         Player,
         Movement::new(
-            DECELERATION_RATE_PIXELS,
+            ACCELERATION_RATE_PIXELS,
             DECELERATION_RATE_PIXELS,
             WALKING_SPEED_PIXELS_PER_SECOND,
             1.0,
