@@ -6,7 +6,7 @@ pub(super) fn plugin(app: &mut App) {
 }
 
 #[derive(Event, Reflect)]
-pub struct CameraCutieEvent(Entity);
+pub struct CameraCutieEvent(pub Entity);
 
 impl Configure for CameraCutieEvent {
     fn configure(app: &mut App) {
