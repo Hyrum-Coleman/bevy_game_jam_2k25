@@ -20,7 +20,10 @@ impl Configure for LevelAssets {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
         app.init_asset::<TiledMap>();
+        app.add_plugins(TiledMapPlugin::default());
+        app.add_plugins(TiledPhysicsPlugin::<TiledPhysicsAvianBackend>::default());
         app.init_collection::<Self>();
+
     }
 }
 
@@ -33,8 +36,6 @@ impl Configure for Level {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
         app.add_state::<Self>();
-        app.add_plugins(TiledMapPlugin::default());
-        app.add_plugins(TiledPhysicsPlugin::<TiledPhysicsAvianBackend>::default());
         app.add_systems(StateFlush, Level::ANY.on_edge(despawn, spawn_world));
     }
 }
