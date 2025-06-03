@@ -34,13 +34,16 @@ bevy = { version = "0.16", default-features = false, features = [
     # File formats
     "png",
     "vorbis",
+    "ktx2",
+    "bevy_sprite",
+    "bevy_render",
 ] }
 bevy_asset_loader = { version = "0.23", features = ["2d", "progress_tracking"] }
 bevy_common_assets = { version = "0.13", default-features = false, features = [
     "ron",
 ] }
-bevy_ecs_tiled = { version = "0.7.0", features = ["avian"] }
-bevy_ecs_tilemap = "0.16.0"
+bevy_ecs_tiled = { version = "0.7.0", features = ["avian", "render"] }
+bevy_ecs_tilemap = { version = "0.16.0", features = ["render"] }
 bevy_editor_pls = { version = "0.11", features = [
     "highlight_changes",
 ], optional = true }
