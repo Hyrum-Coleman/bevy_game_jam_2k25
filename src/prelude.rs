@@ -22,6 +22,8 @@ pub use bevy::sprite::Anchor;
 pub use bevy::ui::FocusPolicy;
 pub use bevy::ui::Val::*;
 pub use bevy_asset_loader::prelude::*;
+pub use bevy_ecs_tiled::prelude::*;
+pub use bevy_ecs_tilemap::prelude::*;
 #[cfg(feature = "native_dev")]
 pub use bevy_simple_subsecond_system::prelude::*;
 pub use iyes_progress::prelude::*;
