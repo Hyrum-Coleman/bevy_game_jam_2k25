@@ -36,7 +36,7 @@ impl Configure for ActorAssets {
 fn create_entity_sprite(sprite: Handle<Image>) -> impl Bundle {
     (
         Sprite::from_image(sprite),
-        RigidBody::Kinematic,
+        RigidBody::Dynamic,
         LockedAxes::ROTATION_LOCKED,
     )
 }
