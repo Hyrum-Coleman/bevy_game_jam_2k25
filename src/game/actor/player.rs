@@ -54,5 +54,4 @@ pub fn get_player(texture: Handle<Image>) -> impl Bundle {
         ColliderDensity(5.0),
         CameraCutie,
     )
-    //     Collider::rectangle(32.0, 64.0),
 }
