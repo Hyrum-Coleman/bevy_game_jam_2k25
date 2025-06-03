@@ -1,5 +1,5 @@
 use crate::game::actor::ActorAssets;
-use crate::game::actor::camera_cutie::{send_camera_follow_event, CameraCutieEvent};
+use crate::game::actor::camera_cutie::{CameraCutieEvent, send_camera_follow_event};
 use crate::game::actor::enemy::get_enemy;
 use crate::game::actor::player::get_player;
 use crate::prelude::*;
