@@ -59,6 +59,7 @@ pub enum GameplayAction {
 impl Configure for GameplayAction {
     fn configure(app: &mut App) {
         app.init_resource::<ActionState<Self>>();
+        app.add_plugins(InputManagerPlugin::<Self>::default());
         app.insert_resource(
             InputMap::default()
                 .with(Self::Pause, GamepadButton::Start)
