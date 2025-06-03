@@ -40,6 +40,7 @@ pub fn get_player(texture: Handle<Image>) -> impl Bundle {
             .with_dual_axis(MovementAction::Move, VirtualDPad::wasd()),
         create_entity_sprite(texture),
         CollisionLayers::new(GameLayer::Player, LayerMask::ALL),
+        Collider::rectangle(32., 64.),
         ColliderDensity(5.0),
         CameraCutie,
     )

@@ -1,4 +1,5 @@
 mod camera_cutie;
+pub mod enemy;
 pub mod facing;
 pub mod movement;
 pub mod player;
@@ -11,6 +12,7 @@ pub(super) fn plugin(app: &mut App) {
         movement::plugin,
         facing::plugin,
         player::plugin,
+        enemy::plugin,
         camera_cutie::plugin,
     ));
 }

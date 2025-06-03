@@ -1,4 +1,5 @@
 use crate::game::actor::ActorAssets;
+use crate::game::actor::enemy::get_enemy;
 use crate::game::actor::player::get_player;
 use crate::prelude::*;
 use crate::screen::Screen;
@@ -64,10 +65,7 @@ pub fn spawn_world(
     ));
 
     commands.spawn((
-        Sprite {
-            image: actor_assets.orc_image.clone(),
-            ..default()
-        },
+        get_enemy("Orc", actor_assets.orc_image.clone()),
         DespawnOnExitState::<Screen>::Recursive,
     ));
 }
