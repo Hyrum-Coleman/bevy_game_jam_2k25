@@ -19,7 +19,6 @@ impl Configure for Player {
     }
 }
 
-
 // Walking Speed is in ft/s (1ft=12px)
 const WALKING_SPEED_FEET_PER_SECOND: f32 = 7.0;
 
@@ -32,7 +31,6 @@ const ACCELERATION_RATE_FEET: f32 = 100.0;
 const ACCELERATION_RATE_PIXELS: f32 = ACCELERATION_RATE_FEET * 12.0;
 const DECELERATION_RATE_FEET: f32 = 50.0;
 const DECELERATION_RATE_PIXELS: f32 = DECELERATION_RATE_FEET * 12.0;
-
 
 pub fn get_player(texture: Handle<Image>) -> impl Bundle {
     (

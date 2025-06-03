@@ -1,5 +1,5 @@
-use crate::game::actor::create_entity_sprite;
 use crate::game::GameLayer;
+use crate::game::actor::create_entity_sprite;
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {

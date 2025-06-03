@@ -1,7 +1,7 @@
 pub mod input;
 
-use std::cmp::Ordering;
 use crate::prelude::*;
+use std::cmp::Ordering;
 
 pub(super) fn plugin(app: &mut App) {
     app.configure::<(Movement, MovementController)>();
@@ -43,7 +43,12 @@ impl Configure for Movement {
 
 fn apply_movement(
     time: Res<Time>,
-    mut movement_query: Query<(&Movement, &mut MovementController, &mut LinearVelocity, &mut Sprite)>,
+    mut movement_query: Query<(
+        &Movement,
+        &mut MovementController,
+        &mut LinearVelocity,
+        &mut Sprite,
+    )>,
 ) {
     let dt = time.delta_secs();
 
