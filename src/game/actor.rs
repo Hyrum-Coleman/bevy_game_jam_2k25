@@ -1,4 +1,4 @@
-mod camera_cutie;
+pub mod camera_cutie;
 pub mod enemy;
 pub mod facing;
 pub mod movement;

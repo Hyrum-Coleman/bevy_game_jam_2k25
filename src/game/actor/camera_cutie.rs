@@ -2,17 +2,15 @@ use crate::core::camera::SmoothFollow;
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
-    app.configure::<CameraCutie>();
+    app.configure::<CameraCutieEvent>();
 }
 
-#[derive(Component, Reflect, Default)]
-#[reflect(Component)]
-pub struct CameraCutie;
+#[derive(Event, Reflect)]
+pub struct CameraCutieEvent(Entity);
 
-impl Configure for CameraCutie {
+impl Configure for CameraCutieEvent {
     fn configure(app: &mut App) {
-        app.register_type::<Self>();
-
+        app.add_event::<CameraCutieEvent>();
         app.add_systems(
             Update,
             camera_follow
@@ -22,13 +20,17 @@ impl Configure for CameraCutie {
     }
 }
 
+pub fn send_camera_follow_event(entity: Entity, mut event: EventWriter<CameraCutieEvent>) {
+    event.write(CameraCutieEvent(entity));
+}
+
 fn camera_follow(
     mut camera_query: Query<&mut SmoothFollow>,
-    camera_target_query: Query<Entity, With<CameraCutie>>,
+    mut ev_set: EventReader<CameraCutieEvent>,
 ) {
-    if let Ok(camera_target) = camera_target_query.single() {
-        if let Ok(mut follow) = camera_query.single_mut() {
-            follow.target = camera_target;
-        }
+    let mut smooth_follow = r!(camera_query.single_mut());
+
+    for ev in ev_set.read() {
+        smooth_follow.target = ev.0;
     }
 }

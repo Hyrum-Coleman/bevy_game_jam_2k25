@@ -1,4 +1,5 @@
 use crate::game::actor::ActorAssets;
+use crate::game::actor::camera_cutie::{send_camera_follow_event, CameraCutieEvent};
 use crate::game::actor::enemy::get_enemy;
 use crate::game::actor::player::get_player;
 use crate::prelude::*;
@@ -42,6 +43,7 @@ pub fn spawn_world(
     _world: NextRef<Level>,
     world_assets: Res<WorldAssets>,
     actor_assets: Res<ActorAssets>,
+    set_camera_event: EventWriter<CameraCutieEvent>,
 ) {
     commands.spawn((
         Sprite {
@@ -58,11 +60,12 @@ pub fn spawn_world(
         DespawnOnExitState::<Screen>::Recursive,
     ));
 
-    commands.spawn((
+    let player = commands.spawn((
         get_player(actor_assets.player_image.clone()),
         DespawnOnExitState::<Level>::default(),
         Transform::from_xyz(64., 64., 2.),
     ));
+    send_camera_follow_event(player.id(), set_camera_event);
 
     commands.spawn((
         get_enemy("Orc", actor_assets.orc_image.clone()),
