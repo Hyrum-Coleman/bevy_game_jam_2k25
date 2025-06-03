@@ -12,15 +12,14 @@ pub(super) fn plugin(app: &mut App) {
 #[derive(AssetCollection, Resource, Reflect, Default, Debug)]
 #[reflect(Resource)]
 pub struct WorldAssets {
-    #[asset(path = "image/tile.png")]
-    floor_sprite: Handle<Image>,
-    #[asset(path = "image/wall.png")]
-    wall_sprite: Handle<Image>,
+    #[asset(path = "maps/orthogonal/multiple_layers_with_colliders.tmx")]
+    map_assets: Handle<TiledMap>,
 }
 
 impl Configure for WorldAssets {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
+        app.init_asset::<TiledMap>();
         app.init_collection::<Self>();
     }
 }
@@ -34,6 +33,9 @@ impl Configure for Level {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
         app.add_state::<Self>();
+        app.add_plugins(TiledMapPlugin::default());
+        app.add_plugins(TilemapPlugin);
+        app.add_plugins(TiledPhysicsPlugin::<TiledPhysicsAvianBackend>::default());
         app.add_systems(StateFlush, Level::ANY.on_edge(despawn, spawn_world));
     }
 }
@@ -46,18 +48,9 @@ pub fn spawn_world(
     set_camera_event: EventWriter<CameraCutieEvent>,
 ) {
     commands.spawn((
-        Sprite {
-            image: world_assets.floor_sprite.clone(),
-            custom_size: Some(Vec2::new(2560., 1440.)),
-            image_mode: SpriteImageMode::Tiled {
-                tile_x: true,
-                tile_y: true,
-                stretch_value: 1.0,
-            },
-            ..default()
-        },
-        Transform::from_xyz(0., 0., -5.),
-        DespawnOnExitState::<Screen>::Recursive,
+        TiledMapHandle(world_assets.map_assets.clone()),
+        TilemapAnchor::Center,
+        TiledWorldChunking::new(200., 200.),
     ));
 
     let player = commands.spawn((
