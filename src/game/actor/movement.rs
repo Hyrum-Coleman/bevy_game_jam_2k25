@@ -58,7 +58,6 @@ fn apply_movement(
     let dt = time.delta_secs();
 
     for (movement, mut controller, mut velocity) in &mut movement_query {
-        info!("Movement Controller:  {}", controller.0);
         if controller.0 == Vec2::ZERO || velocity.0.length_squared() >= movement.speed.powi(2) {
             // Apply deceleration
             velocity.0 *= movement.decel.powf(dt);
@@ -81,9 +80,8 @@ fn apply_movement(
             // Apply acceleration
             velocity.0 += movement.accel * controller.0 * dt;
             velocity.0 = velocity.0.clamp_length_max(movement.speed);
-            info!("Set velocity to {:?}", velocity.0);
+            controller.0 = Vec2::ZERO;
         }
-        controller.0 = Vec2::ZERO;
     }
 }
 

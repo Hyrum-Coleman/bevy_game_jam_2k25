@@ -39,6 +39,5 @@ fn record_movement_action(
             .axis_pair(&MovementAction::Move)
             .xy()
             .clamp_length_max(1.0);
-        info!("Set controller.0 to: {}", controller.0);
     }
 }
