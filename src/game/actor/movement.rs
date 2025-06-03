@@ -1,5 +1,6 @@
 pub mod input;
 
+use std::cmp::Ordering;
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
@@ -42,11 +43,11 @@ impl Configure for Movement {
 
 fn apply_movement(
     time: Res<Time>,
-    mut movement_query: Query<(&Movement, &mut MovementController, &mut LinearVelocity)>,
+    mut movement_query: Query<(&Movement, &mut MovementController, &mut LinearVelocity, &mut Sprite)>,
 ) {
     let dt = time.delta_secs();
 
-    for (movement, mut controller, mut velocity) in &mut movement_query {
+    for (movement, mut controller, mut velocity, mut sprite) in &mut movement_query {
         if controller.0 == Vec2::ZERO || velocity.0.length_squared() >= movement.speed.powi(2) {
             if velocity.x != 0.0 {
                 let sign_x = velocity.x.signum();
@@ -66,6 +67,13 @@ fn apply_movement(
             // Apply acceleration
             velocity.0 += movement.accel * controller.0 * dt;
             velocity.0 = velocity.0.clamp_length_max(movement.speed);
+
+            let flip = match controller.0.x.partial_cmp(&0.0).unwrap() {
+                Ordering::Less => false,
+                Ordering::Equal => false,
+                Ordering::Greater => true,
+            };
+            sprite.flip_x = flip;
             controller.0 = Vec2::ZERO;
         }
     }
