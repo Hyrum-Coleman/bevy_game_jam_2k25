@@ -34,7 +34,6 @@ impl Configure for Level {
         app.register_type::<Self>();
         app.add_state::<Self>();
         app.add_plugins(TiledMapPlugin::default());
-        app.add_plugins(TilemapPlugin);
         app.add_plugins(TiledPhysicsPlugin::<TiledPhysicsAvianBackend>::default());
         app.add_systems(StateFlush, Level::ANY.on_edge(despawn, spawn_world));
     }
