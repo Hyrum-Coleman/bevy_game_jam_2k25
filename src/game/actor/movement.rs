@@ -15,8 +15,8 @@ pub(crate) const WALKING_SPEED_PIXELS_PER_SECOND: f32 = 12.0 * WALKING_SPEED_FEE
 pub(crate) const _SPRINT_MULTIPLIER: f32 = 2.0;
 
 //ft/s^2
-pub(crate) const DEACCELERATION_RATE_FEET: f32 = 50.0;
-pub(crate) const DEACCELERATION_RATE_PIXELS: f32 = DEACCELERATION_RATE_FEET * 12.0;
+pub(crate) const DECELERATION_RATE_FEET: f32 = 50.0;
+pub(crate) const DECELERATION_RATE_PIXELS: f32 = DECELERATION_RATE_FEET * 12.0;
 
 #[derive(Component, Reflect, Serialize, Deserialize, Copy, Clone, Default)]
 #[reflect(Component)]
@@ -64,14 +64,14 @@ fn apply_movement(
 
             if velocity.x != 0.0 {
                 let sign_x = velocity.x.signum();
-                velocity.x -= DEACCELERATION_RATE_PIXELS * time.delta_secs() * sign_x;
+                velocity.x -= DECELERATION_RATE_PIXELS * time.delta_secs() * sign_x;
                 if velocity.x.signum() != sign_x {
                     velocity.x = 0.0
                 }
             }
             if velocity.y != 0.0 {
                 let sign_y = velocity.y.signum();
-                velocity.y -= DEACCELERATION_RATE_PIXELS * time.delta_secs() * sign_y;
+                velocity.y -= DECELERATION_RATE_PIXELS * time.delta_secs() * sign_y;
                 if velocity.y.signum() != sign_y {
                     velocity.y = 0.0
                 }
