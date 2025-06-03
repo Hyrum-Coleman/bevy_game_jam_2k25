@@ -35,8 +35,8 @@ pub use serde::Deserialize;
 pub use serde::Serialize;
 pub use tiny_bail::prelude::*;
 
+pub use crate::core::UpdateSystems;
 pub use crate::core::pause::PausableSystems;
 pub use crate::core::pause::Pause;
-pub use crate::core::UpdateSystems;
 pub use crate::theme::prelude::*;
 pub use crate::util::prelude::*;

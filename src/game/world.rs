@@ -1,5 +1,5 @@
-use crate::game::actor::player::get_player;
 use crate::game::actor::ActorAssets;
+use crate::game::actor::player::get_player;
 use crate::prelude::*;
 use crate::screen::Screen;
 

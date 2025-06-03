@@ -1,12 +1,12 @@
 use core::f32;
 
-use crate::core::audio::music_audio;
 use crate::core::audio::AudioSettings;
+use crate::core::audio::music_audio;
 use crate::core::camera::{CameraRoot, SmoothFollow};
-use crate::game::actor::player::Player;
-use crate::game::actor::ActorAssets;
-use crate::game::world::{Level, WorldAssets};
 use crate::game::GameLayer;
+use crate::game::actor::ActorAssets;
+use crate::game::actor::player::Player;
+use crate::game::world::{Level, WorldAssets};
 use crate::menu::Menu;
 use crate::prelude::*;
 use crate::screen::Screen;

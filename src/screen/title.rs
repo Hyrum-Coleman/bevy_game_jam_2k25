@@ -1,9 +1,9 @@
-use crate::core::audio::music_audio;
 use crate::core::audio::AudioSettings;
+use crate::core::audio::music_audio;
 use crate::menu::Menu;
 use crate::prelude::*;
-use crate::screen::gameplay::{load_collections, GameplayAssets};
 use crate::screen::Screen;
+use crate::screen::gameplay::{GameplayAssets, load_collections};
 
 pub(super) fn plugin(app: &mut App) {
     app.add_loading_state(load_collections(LoadingState::new(Screen::Title.bevy())));

@@ -1,8 +1,8 @@
 use crate::prelude::*;
-use crate::screen::fade::fade_out;
-use crate::screen::gameplay::{load_collections, GameplayAssets};
 use crate::screen::Screen;
 use crate::screen::ScreenRoot;
+use crate::screen::fade::fade_out;
+use crate::screen::gameplay::{GameplayAssets, load_collections};
 
 pub(super) fn plugin(app: &mut App) {
     app.add_loading_state(load_collections(LoadingState::new(Screen::Loading.bevy())));

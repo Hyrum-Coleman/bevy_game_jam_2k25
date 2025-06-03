@@ -1,10 +1,10 @@
 use super::movement::input::MovementAction;
 use crate::core::camera::{CameraRoot, SmoothFollow};
+use crate::game::GameLayer;
 use crate::game::actor::create_entity_sprite;
 use crate::game::actor::movement::{
-    Movement, MovementController, DEACCELERATION_RATE_PIXELS, WALKING_SPEED_PIXELS_PER_SECOND,
+    DEACCELERATION_RATE_PIXELS, Movement, MovementController, WALKING_SPEED_PIXELS_PER_SECOND,
 };
-use crate::game::GameLayer;
 use crate::prelude::*;
 use crate::screen::gameplay::GameplayAssets;
 use bevy::ecs::system::SystemState;

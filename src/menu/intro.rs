@@ -1,8 +1,8 @@
 use crate::menu::Menu;
 use crate::menu::MenuRoot;
 use crate::prelude::*;
-use crate::screen::fade::fade_out;
 use crate::screen::Screen;
+use crate::screen::fade::fade_out;
 
 pub(super) fn plugin(app: &mut App) {
     app.add_systems(StateFlush, Menu::Intro.on_enter(spawn_intro_menu));

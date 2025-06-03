@@ -18,12 +18,12 @@ pub mod prelude {
     pub use super::interaction::InteractionDisabled;
     pub use super::interaction::InteractionSfx;
     pub use super::interaction::InteractionTheme;
-    pub use super::text::parse_rich;
-    pub use super::text::parse_rich_custom;
-    pub use super::text::DynamicFontSize;
     pub use super::text::BOLD_FONT_HANDLE;
+    pub use super::text::DynamicFontSize;
     pub use super::text::FONT_HANDLE;
     pub use super::text::THICK_FONT_HANDLE;
+    pub use super::text::parse_rich;
+    pub use super::text::parse_rich_custom;
     pub use super::widget;
 }
 

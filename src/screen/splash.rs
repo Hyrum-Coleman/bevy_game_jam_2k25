@@ -3,12 +3,12 @@ use bevy::image::ImageLoaderSettings;
 use bevy::image::ImageSampler;
 
 use crate::prelude::*;
-use crate::screen::fade::fade_out;
-use crate::screen::fade::FADE_IN_SECS;
-use crate::screen::title::TitleAssets;
-use crate::screen::wait_in_screen;
 use crate::screen::Screen;
 use crate::screen::ScreenRoot;
+use crate::screen::fade::FADE_IN_SECS;
+use crate::screen::fade::fade_out;
+use crate::screen::title::TitleAssets;
+use crate::screen::wait_in_screen;
 
 pub(super) fn plugin(app: &mut App) {
     app.add_loading_state(
