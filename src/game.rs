@@ -9,8 +9,10 @@ pub(super) fn plugin(app: &mut App) {
 
 #[derive(PhysicsLayer, Default)]
 pub enum GameLayer {
+    #[default]
+    Default,
     Player,
     Enemy,
-    #[default]
     Projectile,
+    Wall,
 }

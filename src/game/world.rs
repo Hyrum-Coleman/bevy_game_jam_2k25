@@ -1,3 +1,4 @@
+use crate::game::GameLayer;
 use crate::game::actor::ActorAssets;
 use crate::game::actor::camera_cutie::{CameraCutieEvent, send_camera_follow_event};
 use crate::game::actor::enemy::get_enemy;
@@ -23,7 +24,6 @@ impl Configure for LevelAssets {
         app.add_plugins(TiledMapPlugin::default());
         app.add_plugins(TiledPhysicsPlugin::<TiledPhysicsAvianBackend>::default());
         app.init_collection::<Self>();
-
     }
 }
 
@@ -50,7 +50,8 @@ pub fn spawn_world(
     commands.spawn((
         TiledMapHandle(world_assets.map_assets.clone()),
         TilemapAnchor::Center,
-        TiledWorldChunking::new(200., 200.),
+        RigidBody::Static,
+        CollisionLayers::new(GameLayer::Wall, LayerMask::ALL),
     ));
 
     let player = commands.spawn((
