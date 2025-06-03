@@ -6,17 +6,17 @@ use crate::prelude::*;
 use crate::screen::Screen;
 
 pub(super) fn plugin(app: &mut App) {
-    app.configure::<(WorldAssets, Level)>();
+    app.configure::<(LevelAssets, Level)>();
 }
 
 #[derive(AssetCollection, Resource, Reflect, Default, Debug)]
 #[reflect(Resource)]
-pub struct WorldAssets {
+pub struct LevelAssets {
     #[asset(path = "maps/orthogonal/multiple_layers_with_colliders.tmx")]
     map_assets: Handle<TiledMap>,
 }
 
-impl Configure for WorldAssets {
+impl Configure for LevelAssets {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
         app.init_asset::<TiledMap>();
@@ -43,7 +43,7 @@ impl Configure for Level {
 pub fn spawn_world(
     mut commands: Commands,
     _world: NextRef<Level>,
-    world_assets: Res<WorldAssets>,
+    world_assets: Res<LevelAssets>,
     actor_assets: Res<ActorAssets>,
     set_camera_event: EventWriter<CameraCutieEvent>,
 ) {
