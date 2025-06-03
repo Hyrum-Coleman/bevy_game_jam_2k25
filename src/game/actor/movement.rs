@@ -73,7 +73,7 @@ fn apply_movement(
             velocity.0 += movement.accel * controller.0 * dt;
             velocity.0 = velocity.0.clamp_length_max(movement.speed);
 
-            let flip = match controller.0.x.partial_cmp(&0.0).unwrap() {
+            let flip = match velocity.0.x.partial_cmp(&0.0).unwrap() {
                 Ordering::Less => false,
                 Ordering::Equal => false,
                 Ordering::Greater => true,
