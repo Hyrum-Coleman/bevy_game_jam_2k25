@@ -1,3 +1,4 @@
+mod camera_cutie;
 pub mod facing;
 pub mod movement;
 pub mod player;
@@ -6,7 +7,12 @@ use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
     app.configure::<ActorAssets>();
-    app.add_plugins((movement::plugin, facing::plugin, player::plugin));
+    app.add_plugins((
+        movement::plugin,
+        facing::plugin,
+        player::plugin,
+        camera_cutie::plugin,
+    ));
 }
 
 #[derive(AssetCollection, Resource, Reflect, Default, Debug)]
