@@ -3,8 +3,8 @@ use bevy::reflect::GetTypeRegistration;
 use bevy::reflect::Typed;
 
 use crate::animation::offset::NodeOffset;
-use crate::core::audio::AudioSettings;
 use crate::core::audio::ui_audio;
+use crate::core::audio::AudioSettings;
 use crate::prelude::*;
 use crate::theme::ThemeAssets;
 
