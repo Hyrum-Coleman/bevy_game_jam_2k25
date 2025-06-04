@@ -52,6 +52,7 @@ pub fn spawn_world(
         TilemapAnchor::Center,
         RigidBody::Static,
         CollisionLayers::new(GameLayer::Wall, LayerMask::ALL),
+        DespawnOnExitState::<Level>::default(),
     ));
 
     let player = commands.spawn((
