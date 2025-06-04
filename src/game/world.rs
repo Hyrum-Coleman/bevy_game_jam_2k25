@@ -56,8 +56,8 @@ pub fn spawn_world(
 
     let player = commands.spawn((
         get_player(actor_assets.player_image.clone()),
+        Transform::from_xyz(64., 0., 2.),
         DespawnOnExitState::<Level>::default(),
-        Transform::from_xyz(64., 64., 2.),
     ));
     send_camera_follow_event(player.id(), set_camera_event);
 
