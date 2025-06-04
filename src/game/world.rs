@@ -13,7 +13,7 @@ pub(super) fn plugin(app: &mut App) {
 #[derive(AssetCollection, Resource, Reflect, Default, Debug)]
 #[reflect(Resource)]
 pub struct LevelAssets {
-    #[asset(path = "maps/orthogonal/multiple_layers_with_colliders.tmx")]
+    #[asset(path = "maps/World_H_Map.tmx")]
     map_assets: Handle<TiledMap>,
 }
 
@@ -63,6 +63,7 @@ pub fn spawn_world(
 
     commands.spawn((
         get_enemy("Orc", actor_assets.orc_image.clone()),
+        Transform::from_xyz(0., 0., 2.),
         DespawnOnExitState::<Screen>::Recursive,
     ));
 }
