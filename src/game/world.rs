@@ -56,7 +56,7 @@ pub fn spawn_world(
     ));
 
     let player = commands.spawn((
-        get_player(actor_assets.player_image.clone()),
+        get_player(actor_assets.rat_handle.clone()),
         Transform::from_xyz(64., 0., 2.),
         DespawnOnExitState::<Level>::default(),
     ));

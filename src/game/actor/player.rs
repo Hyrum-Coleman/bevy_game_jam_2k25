@@ -1,6 +1,6 @@
 use super::movement::input::MovementAction;
 use crate::game::GameLayer;
-use crate::game::actor::create_entity_sprite;
+use crate::game::actor::create_entity_aseprite;
 use crate::game::actor::movement::{Movement, MovementController};
 use crate::prelude::*;
 
@@ -31,7 +31,7 @@ const ACCELERATION_RATE_PIXELS: f32 = ACCELERATION_RATE_FEET * 12.0;
 const DECELERATION_RATE_FEET: f32 = 50.0;
 const DECELERATION_RATE_PIXELS: f32 = DECELERATION_RATE_FEET * 12.0;
 
-pub fn get_player(texture: Handle<Image>) -> impl Bundle {
+pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
     (
         Name::new("Player"),
         Player,
@@ -45,7 +45,7 @@ pub fn get_player(texture: Handle<Image>) -> impl Bundle {
         InputMap::default()
             .with_dual_axis(MovementAction::Move, GamepadStick::LEFT)
             .with_dual_axis(MovementAction::Move, VirtualDPad::wasd()),
-        create_entity_sprite(texture),
+        create_entity_aseprite(texture),
         CollisionLayers::new(GameLayer::Player, LayerMask::ALL),
         Collider::rectangle(32., 64.),
         ColliderDensity(5.0),

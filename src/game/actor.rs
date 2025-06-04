@@ -36,9 +36,26 @@ impl Configure for ActorAssets {
     }
 }
 
-fn create_entity_sprite(sprite: Handle<Image>) -> impl Bundle {
+fn create_entity_aseprite(sprite: Handle<Aseprite>) -> impl Bundle {
     (
-        Sprite::from_image(sprite),
+        AseAnimation {
+            aseprite: sprite,
+            animation: Animation::tag("Idle")
+                .with_repeat(AnimationRepeat::Loop)
+                .with_speed(1.75),
+        },
+        Sprite { ..default() },
+        RigidBody::Dynamic,
+        LockedAxes::ROTATION_LOCKED,
+    )
+}
+
+fn create_entity_image(sprite: Handle<Image>) -> impl Bundle {
+    (
+        Sprite {
+            image: sprite,
+            ..default()
+        },
         RigidBody::Dynamic,
         LockedAxes::ROTATION_LOCKED,
     )
