@@ -57,7 +57,7 @@ pub fn spawn_world(
 
     let mut player_spawn_commands = commands.spawn((
         get_player(actor_assets.rat_handle.clone()),
-        Transform::from_xyz(64., 0., 2.),
+        Transform::from_xyz(64., 0., 10.),
         DespawnOnExitState::<Level>::default(),
     ));
     let player_id = player_spawn_commands.id().clone();
