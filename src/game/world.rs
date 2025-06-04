@@ -60,7 +60,6 @@ pub fn spawn_world(
         Transform::from_xyz(64., 0., 10.),
         DespawnOnExitState::<Level>::default(),
     ));
-    let player_id = player_spawn_commands.id().clone();
     player_spawn_commands.with_children(|children| {
         children.spawn((
             CollisionLayers::new(GameLayer::Player, LayerMask::ALL),
@@ -70,7 +69,7 @@ pub fn spawn_world(
         ));
     });
 
-    send_camera_follow_event(player_id, set_camera_event);
+    send_camera_follow_event(player_spawn_commands.id(), set_camera_event);
 
     commands.spawn((
         get_enemy("Orc", actor_assets.orc_image.clone()),
