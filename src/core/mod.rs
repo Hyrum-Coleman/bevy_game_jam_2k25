@@ -22,6 +22,10 @@ pub(super) fn plugin(app: &mut App) {
         DefaultPlugins
             .build()
             .set(ImagePlugin::default_nearest())
+            .set(AssetPlugin {
+                mode: AssetMode::Processed,
+                ..default()
+            })
             .replace::<AudioPlugin>(audio::plugin)
             .replace::<WindowPlugin>(window::plugin)
             // `window::plugin` requires the following plugins:

@@ -24,11 +24,14 @@ pub struct ActorAssets {
     pub player_image: Handle<Image>,
     #[asset(path = "image/Orc_Guy.png")]
     pub orc_image: Handle<Image>,
+    #[asset(path = "image/Rat_Base.aseprite")]
+    pub rat_handle: Handle<Aseprite>,
 }
 
 impl Configure for ActorAssets {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
+        app.add_plugins(AsepriteUltraPlugin);
         app.init_collection::<Self>();
     }
 }
