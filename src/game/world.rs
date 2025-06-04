@@ -1,3 +1,4 @@
+use crate::game::GameLayer;
 use crate::game::actor::ActorAssets;
 use crate::game::actor::camera_cutie::{CameraCutieEvent, send_camera_follow_event};
 use crate::game::actor::enemy::get_enemy;
@@ -6,21 +7,22 @@ use crate::prelude::*;
 use crate::screen::Screen;
 
 pub(super) fn plugin(app: &mut App) {
-    app.configure::<(WorldAssets, Level)>();
+    app.configure::<(LevelAssets, Level)>();
 }
 
 #[derive(AssetCollection, Resource, Reflect, Default, Debug)]
 #[reflect(Resource)]
-pub struct WorldAssets {
-    #[asset(path = "image/tile.png")]
-    floor_sprite: Handle<Image>,
-    #[asset(path = "image/wall.png")]
-    wall_sprite: Handle<Image>,
+pub struct LevelAssets {
+    #[asset(path = "maps/World_H_Map.tmx")]
+    map_assets: Handle<TiledMap>,
 }
 
-impl Configure for WorldAssets {
+impl Configure for LevelAssets {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
+        app.init_asset::<TiledMap>();
+        app.add_plugins(TiledMapPlugin::default());
+        app.add_plugins(TiledPhysicsPlugin::<TiledPhysicsAvianBackend>::default());
         app.init_collection::<Self>();
     }
 }
@@ -41,34 +43,28 @@ impl Configure for Level {
 pub fn spawn_world(
     mut commands: Commands,
     _world: NextRef<Level>,
-    world_assets: Res<WorldAssets>,
+    world_assets: Res<LevelAssets>,
     actor_assets: Res<ActorAssets>,
     set_camera_event: EventWriter<CameraCutieEvent>,
 ) {
     commands.spawn((
-        Sprite {
-            image: world_assets.floor_sprite.clone(),
-            custom_size: Some(Vec2::new(2560., 1440.)),
-            image_mode: SpriteImageMode::Tiled {
-                tile_x: true,
-                tile_y: true,
-                stretch_value: 1.0,
-            },
-            ..default()
-        },
-        Transform::from_xyz(0., 0., -5.),
-        DespawnOnExitState::<Screen>::Recursive,
+        TiledMapHandle(world_assets.map_assets.clone()),
+        TilemapAnchor::Center,
+        RigidBody::Static,
+        CollisionLayers::new(GameLayer::Wall, LayerMask::ALL),
+        DespawnOnExitState::<Level>::default(),
     ));
 
     let player = commands.spawn((
         get_player(actor_assets.player_image.clone()),
+        Transform::from_xyz(64., 0., 2.),
         DespawnOnExitState::<Level>::default(),
-        Transform::from_xyz(64., 64., 2.),
     ));
     send_camera_follow_event(player.id(), set_camera_event);
 
     commands.spawn((
         get_enemy("Orc", actor_assets.orc_image.clone()),
+        Transform::from_xyz(0., 0., 2.),
         DespawnOnExitState::<Screen>::Recursive,
     ));
 }

@@ -1,7 +1,7 @@
 use crate::core::audio::AudioSettings;
 use crate::core::audio::music_audio;
 use crate::game::actor::ActorAssets;
-use crate::game::world::{Level, WorldAssets};
+use crate::game::world::{Level, LevelAssets};
 use crate::menu::Menu;
 use crate::prelude::*;
 use crate::screen::Screen;
@@ -32,7 +32,7 @@ fn spawn_gameplay_screen(
 pub fn load_collections(state: LoadingState<BevyState<Screen>>) -> LoadingState<BevyState<Screen>> {
     state
         .load_collection::<GameplayAssets>()
-        .load_collection::<WorldAssets>()
+        .load_collection::<LevelAssets>()
         .load_collection::<ActorAssets>()
 }
 
