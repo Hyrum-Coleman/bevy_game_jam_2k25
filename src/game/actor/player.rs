@@ -1,5 +1,4 @@
 use super::movement::input::MovementAction;
-use crate::game::GameLayer;
 use crate::game::actor::create_entity_aseprite;
 use crate::game::actor::movement::{Movement, MovementController};
 use crate::prelude::*;
