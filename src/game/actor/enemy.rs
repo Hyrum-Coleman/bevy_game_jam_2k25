@@ -23,5 +23,7 @@ pub fn get_enemy(name: &'static str, texture: Handle<Image>) -> impl Bundle {
         create_entity_sprite(texture),
         Collider::rectangle(32., 32.),
         CollisionLayers::new(GameLayer::Enemy, LayerMask::ALL),
+        ExternalForce::new(Vec2::ZERO).with_persistence(false),
+        Restitution::new(0.75),
     )
 }

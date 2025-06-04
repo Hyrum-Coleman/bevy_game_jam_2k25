@@ -2,6 +2,7 @@ use crate::game::GameLayer;
 use crate::game::actor::ActorAssets;
 use crate::game::actor::camera_cutie::{CameraCutieEvent, send_camera_follow_event};
 use crate::game::actor::enemy::get_enemy;
+use crate::game::actor::movement::spring::Spring;
 use crate::game::actor::player::get_player;
 use crate::prelude::*;
 use crate::screen::Screen;
@@ -52,6 +53,7 @@ pub fn spawn_world(
         TilemapAnchor::Center,
         RigidBody::Static,
         CollisionLayers::new(GameLayer::Wall, LayerMask::ALL),
+        Friction::default(),
         DespawnOnExitState::<Level>::default(),
     ));
 
@@ -64,7 +66,12 @@ pub fn spawn_world(
 
     commands.spawn((
         get_enemy("Orc", actor_assets.orc_image.clone()),
-        Transform::from_xyz(0., 0., 2.),
+        LinearDamping(800.),
+        Mass(2.),
+        Spring::default()
+            .with_stiffness(5000.)
+            .with_offset(Vec2::new(-256., -128.)),
+        Transform::from_xyz(-256., -128., 2.),
         DespawnOnExitState::<Screen>::Recursive,
     ));
 }
