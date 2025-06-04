@@ -1,11 +1,12 @@
 pub mod input;
+pub mod spring;
 
 use crate::prelude::*;
 use std::cmp::Ordering;
 
 pub(super) fn plugin(app: &mut App) {
     app.configure::<(Movement, MovementController)>();
-    app.add_plugins(input::plugin);
+    app.add_plugins((input::plugin, spring::plugin));
 }
 
 #[derive(Component, Reflect, Serialize, Deserialize, Copy, Clone, Default)]
