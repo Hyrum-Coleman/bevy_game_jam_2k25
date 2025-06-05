@@ -33,8 +33,6 @@ bevy = { version = "0.16", default-features = false, features = [
 
     # File formats
     "png",
-    "vorbis",
-    "ktx2",
     "bevy_sprite",
     "bevy_render",
 ] }
@@ -87,6 +85,7 @@ variadics_please = "1"
 [target.wasm32-unknown-unknown.dependencies]
 # TODO: Workaround for <https://github.com/rust-random/getrandom/issues/671>.
 getrandom = { version = "0.3", features = ["wasm_js"] }
+tiled = { version = "0.13.0", features = ["wasm"]}
 
 [patch.crates-io]
 # TODO: Workaround for <https://github.com/NiklasEi/bevy_asset_loader/issues/219>.
