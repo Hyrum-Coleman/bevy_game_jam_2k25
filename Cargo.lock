@@ -935,7 +935,7 @@ dependencies = [
 
 [[package]]
 name = "bevy_game_jam_2k25"
-version = "0.0.6"
+version = "0.0.5"
 dependencies = [
  "avian2d",
  "bevy",
