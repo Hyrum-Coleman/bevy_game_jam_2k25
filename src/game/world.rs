@@ -55,12 +55,21 @@ pub fn spawn_world(
         DespawnOnExitState::<Level>::default(),
     ));
 
-    let player = commands.spawn((
-        get_player(actor_assets.player_image.clone()),
-        Transform::from_xyz(64., 0., 2.),
+    let mut player_spawn_commands = commands.spawn((
+        get_player(actor_assets.rat_handle.clone()),
+        Transform::from_xyz(64., 0., 10.),
         DespawnOnExitState::<Level>::default(),
     ));
-    send_camera_follow_event(player.id(), set_camera_event);
+    player_spawn_commands.with_children(|children| {
+        children.spawn((
+            CollisionLayers::new(GameLayer::Player, LayerMask::ALL),
+            Collider::rectangle(32., 16.),
+            Transform::from_xyz(0.0, -24.0, 0.0),
+            ColliderDensity(5.0),
+        ));
+    });
+
+    send_camera_follow_event(player_spawn_commands.id(), set_camera_event);
 
     commands.spawn((
         get_enemy("Orc", actor_assets.orc_image.clone()),

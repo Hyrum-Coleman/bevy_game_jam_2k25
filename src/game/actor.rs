@@ -24,18 +24,38 @@ pub struct ActorAssets {
     pub player_image: Handle<Image>,
     #[asset(path = "image/Orc_Guy.png")]
     pub orc_image: Handle<Image>,
+    #[asset(path = "image/Rat_Base.aseprite")]
+    pub rat_handle: Handle<Aseprite>,
 }
 
 impl Configure for ActorAssets {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
+        app.add_plugins(AsepriteUltraPlugin);
         app.init_collection::<Self>();
     }
 }
 
-fn create_entity_sprite(sprite: Handle<Image>) -> impl Bundle {
+fn create_entity_aseprite(sprite: Handle<Aseprite>) -> impl Bundle {
     (
-        Sprite::from_image(sprite),
+        AseAnimation {
+            aseprite: sprite,
+            animation: Animation::tag("Idle")
+                .with_repeat(AnimationRepeat::Loop)
+                .with_speed(1.75),
+        },
+        Sprite { ..default() },
+        RigidBody::Dynamic,
+        LockedAxes::ROTATION_LOCKED,
+    )
+}
+
+fn create_entity_image(sprite: Handle<Image>) -> impl Bundle {
+    (
+        Sprite {
+            image: sprite,
+            ..default()
+        },
         RigidBody::Dynamic,
         LockedAxes::ROTATION_LOCKED,
     )

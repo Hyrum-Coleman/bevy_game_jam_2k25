@@ -1,5 +1,5 @@
 use crate::game::GameLayer;
-use crate::game::actor::create_entity_sprite;
+use crate::game::actor::create_entity_image;
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
@@ -20,7 +20,7 @@ pub fn get_enemy(name: &'static str, texture: Handle<Image>) -> impl Bundle {
     (
         Name::new(name),
         Enemy,
-        create_entity_sprite(texture),
+        create_entity_image(texture),
         Collider::rectangle(32., 32.),
         CollisionLayers::new(GameLayer::Enemy, LayerMask::ALL),
     )
