@@ -20,11 +20,22 @@ pub struct LevelAssets {
 
 impl Configure for LevelAssets {
     fn configure(app: &mut App) {
+        info!("Configuring assets...");
         app.register_type::<Self>();
         app.init_asset::<TiledMap>();
+        info!("Initialized TiledMap");
+
+        #[cfg(feature = "web")]
+        app.add_plugins(TiledMapPlugin(TiledMapPluginConfig {
+            tiled_types_export_file: None,
+        }));
+        #[cfg(not(feature = "web"))]
         app.add_plugins(TiledMapPlugin::default());
+        info!("TiledMapPlugin added");
         app.add_plugins(TiledPhysicsPlugin::<TiledPhysicsAvianBackend>::default());
+        info!("Physics backend added");
         app.init_collection::<Self>();
+        info!("Configured Assets :) :# :3");
     }
 }
 
