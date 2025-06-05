@@ -1,6 +1,6 @@
 [package]
 name = "bevy_game_jam_2k25"
-version = "0.1.0"
+version = "0.0.6"
 edition = "2024"
 # TODO: Workaround for <https://github.com/DioxusLabs/dioxus/issues/4160>.
 #default-run = "run"
