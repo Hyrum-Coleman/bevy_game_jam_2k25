@@ -16,6 +16,8 @@ pub(super) fn plugin(app: &mut App) {
 pub struct LevelAssets {
     #[asset(path = "maps/World_H.world")]
     hub_assets: Handle<TiledWorld>,
+    #[asset(path = "maps/World_X.world")]
+    x_assets: Handle<TiledWorld>,
 }
 
 impl Configure for LevelAssets {
