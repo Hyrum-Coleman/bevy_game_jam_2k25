@@ -22,6 +22,11 @@ impl Configure for LevelAssets {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
         app.init_asset::<TiledMap>();
+        #[cfg(feature = "web")]
+        app.add_plugins(TiledMapPlugin(TiledMapPluginConfig {
+            tiled_types_export_file: None,
+        }));
+        #[cfg(not(feature = "web"))]
         app.add_plugins(TiledMapPlugin::default());
         app.add_plugins(TiledPhysicsPlugin::<TiledPhysicsAvianBackend>::default());
         app.init_collection::<Self>();

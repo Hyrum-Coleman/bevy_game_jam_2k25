@@ -4,6 +4,8 @@ on:
   # Build for web on any push to main.
   push:
     branches: [main]
+    tags: 
+        - 'v*.*.*'
   # Build for the desired platforms on a manual workflow dispatch.
   workflow_dispatch:
     inputs:
@@ -302,8 +304,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: tmp/app/${{ env.package }}
           asset_name: ${{ env.package }}
-          release_name: ${{ env.version }}
-          tag: ${{ env.version }}
+          release_name: ${{ github.ref_name }}
+          tag: ${{ github.ref_name }}
           overwrite: true
 
   # Upload all packages to itch.io.

@@ -935,7 +935,7 @@ dependencies = [
 
 [[package]]
 name = "bevy_game_jam_2k25"
-version = "0.1.0"
+version = "0.0.5"
 dependencies = [
  "avian2d",
  "bevy",
@@ -960,6 +960,7 @@ dependencies = [
  "rand 0.8.5",
  "ron 0.10.1",
  "serde",
+ "tiled",
  "tiny_bail",
  "tracing",
  "variadics_please",

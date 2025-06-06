@@ -1,6 +1,6 @@
 [package]
 name = "bevy_game_jam_2k25"
-version = "0.1.0"
+version = "0.0.5"
 edition = "2024"
 # TODO: Workaround for <https://github.com/DioxusLabs/dioxus/issues/4160>.
 #default-run = "run"
@@ -34,7 +34,6 @@ bevy = { version = "0.16", default-features = false, features = [
     # File formats
     "png",
     "vorbis",
-    "ktx2",
     "bevy_sprite",
     "bevy_render",
 ] }
@@ -43,8 +42,8 @@ bevy_asset_loader = { version = "0.23", features = ["2d", "progress_tracking"] }
 bevy_common_assets = { version = "0.13", default-features = false, features = [
     "ron",
 ] }
-bevy_ecs_tiled = { version = "0.7.0", features = ["avian", "render"] }
-bevy_ecs_tilemap = { version = "0.16.0", features = ["render"] }
+bevy_ecs_tiled = { version = "0.7.0", features = ["avian"] }
+bevy_ecs_tilemap = { version = "0.16.0"}
 bevy_editor_pls = { version = "0.11", features = [
     "highlight_changes",
 ], optional = true }
@@ -87,6 +86,8 @@ variadics_please = "1"
 [target.wasm32-unknown-unknown.dependencies]
 # TODO: Workaround for <https://github.com/rust-random/getrandom/issues/671>.
 getrandom = { version = "0.3", features = ["wasm_js"] }
+bevy_ecs_tiled = {version = "0.7.0", features = ["wasm"]}
+tiled = { version = "0.14", default-features = false }
 
 [patch.crates-io]
 # TODO: Workaround for <https://github.com/NiklasEi/bevy_asset_loader/issues/219>.
