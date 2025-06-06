@@ -2,17 +2,17 @@
     "maps": [
         {
             "fileName": "World_X/World_X_Empty_Rectangle.tmx",
-            "height": 640,
-            "width": 960,
+            "height": 416,
+            "width": 768,
             "x": 0,
-            "y": -192
+            "y": 0
         },
         {
             "fileName": "World_X/World_X_Center_Hole_Square.tmx",
             "height": 480,
             "width": 480,
             "x": 224,
-            "y": -672
+            "y":-480
         }
     ],
     "onlyShowAdjacentMaps": false,
