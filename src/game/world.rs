@@ -82,10 +82,10 @@ pub fn spawn_world(
 
     commands.spawn((
         get_enemy("Orc", actor_assets.orc_image.clone()),
-        LinearDamping(800.),
+        LinearDamping(80.),
         Mass(2.),
         Spring::default()
-            .with_stiffness(5000.)
+            .with_stiffness(800.)
             .with_offset(Vec2::new(-256., -128.)),
         Transform::from_xyz(-256., -128., -2.),
         DespawnOnExitState::<Screen>::Recursive,
