@@ -2,6 +2,8 @@
     "maps": [
         {
             "fileName": "World_H/World_H_Center.tmx",
+            "height": 640,
+            "width": 960,
             "x": 0,
             "y": 0
         }
