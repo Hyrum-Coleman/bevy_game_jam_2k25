@@ -1,15 +1,16 @@
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
-    app.configure::<Attack>();
+    app.configure::<Damage>();
 }
 
 #[derive(Component, Reflect, Debug)]
 #[reflect(Component)]
-pub struct Attack(pub f32);
+pub struct Damage(pub f32);
 
-impl Configure for Attack {
+impl Configure for Damage {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
     }
 }
+
