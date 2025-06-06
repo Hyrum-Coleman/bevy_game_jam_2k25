@@ -1,9 +1,9 @@
 pub mod camera_cutie;
+pub mod combat;
 pub mod enemy;
 pub mod facing;
 pub mod movement;
 pub mod player;
-pub mod combat;
 
 use crate::prelude::*;
 
