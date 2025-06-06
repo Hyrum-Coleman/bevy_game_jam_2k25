@@ -14,8 +14,8 @@ pub(super) fn plugin(app: &mut App) {
 #[derive(AssetCollection, Resource, Reflect, Default, Debug)]
 #[reflect(Resource)]
 pub struct LevelAssets {
-    #[asset(path = "maps/World_H_Map.tmx")]
-    map_assets: Handle<TiledMap>,
+    #[asset(path = "maps/World_H.world")]
+    hub_assets: Handle<TiledWorld>,
 }
 
 impl Configure for LevelAssets {
@@ -54,8 +54,10 @@ pub fn spawn_world(
     set_camera_event: EventWriter<CameraCutieEvent>,
 ) {
     commands.spawn((
-        TiledMapHandle(world_assets.map_assets.clone()),
+        TiledWorldHandle(world_assets.hub_assets.clone()),
         TilemapAnchor::Center,
+        TiledWorldChunking::new(200., 200.),
+        TiledMapLayerZOffset(5.),
         RigidBody::Static,
         CollisionLayers::new(GameLayer::Wall, LayerMask::ALL),
         Friction::default(),
@@ -64,7 +66,7 @@ pub fn spawn_world(
 
     let mut player_spawn_commands = commands.spawn((
         get_player(actor_assets.rat_handle.clone()),
-        Transform::from_xyz(64., 0., 10.),
+        Transform::from_xyz(64., 0., -1.),
         DespawnOnExitState::<Level>::default(),
     ));
     player_spawn_commands.with_children(|children| {
@@ -85,7 +87,7 @@ pub fn spawn_world(
         Spring::default()
             .with_stiffness(5000.)
             .with_offset(Vec2::new(-256., -128.)),
-        Transform::from_xyz(-256., -128., 2.),
+        Transform::from_xyz(-256., -128., -2.),
         DespawnOnExitState::<Screen>::Recursive,
     ));
 }
