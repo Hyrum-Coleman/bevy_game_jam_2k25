@@ -3,6 +3,7 @@ pub mod enemy;
 pub mod facing;
 pub mod movement;
 pub mod player;
+pub mod combat;
 
 use crate::prelude::*;
 
@@ -13,6 +14,7 @@ pub(super) fn plugin(app: &mut App) {
         facing::plugin,
         player::plugin,
         enemy::plugin,
+        combat::plugin,
         camera_cutie::plugin,
     ));
 }
