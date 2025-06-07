@@ -1,6 +1,7 @@
 use super::movement::input::MovementAction;
 use crate::game::GameLayer;
 use crate::game::actor::combat::damage::Damage;
+use crate::game::actor::combat::health::Health;
 use crate::game::actor::create_entity_aseprite;
 use crate::game::actor::movement::{Movement, MovementController};
 use crate::prelude::*;
@@ -36,6 +37,7 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
     (
         Name::new("Player"),
         Player,
+        Health::new(100.),
         Movement::new(
             ACCELERATION_RATE_PIXELS,
             DECELERATION_RATE_PIXELS,
