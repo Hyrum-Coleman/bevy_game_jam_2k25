@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use nalgebra::{dmatrix, matrix, Const, DMatrix, Matrix, Matrix3};
+use nalgebra::{Const, DMatrix, Matrix, Matrix3, dmatrix, matrix};
 
 pub(super) fn plugin(app: &mut App) {
     app.configure::<LevelGenerator>();
@@ -12,6 +12,42 @@ pub struct LevelGenerator {}
 impl Configure for LevelGenerator {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
+    }
+}
+
+struct Map{
+    rooms:HashMap<(i32,i32),Room>,
+}
+
+impl Map{
+    fn new(map_shape:HashSet<(i32,i32)>)->Self{
+        let mut rooms:HashMap<(i32,i32), Room> = HashMap::new();
+        for coordinate in map_shape.clone(){
+            add_connection(coordinate, &mut rooms, &map_shape);
+        }
+        Self { rooms }
+    }
+}
+struct Room {
+    connections: Connections,
+}
+
+impl Room{
+    fn new()->Self{
+        Room { connections: Connections::new() }
+    }
+}
+
+struct Connections{
+    left:Option<(i32,i32)>,
+    right:Option<(i32,i32)>,
+    up:Option<(i32,i32)>,
+    down:Option<(i32,i32)>,
+}
+
+impl Connections{
+    fn new()->Self{
+        Self { left: None, right: None, up: None, down: None }
     }
 }
 
@@ -28,43 +64,79 @@ fn create_level_shape(passes: u32) -> HashSet<(i32, i32)> {
             4 => (-1, 0),
             _ => panic!("Random Number Generator generated out of range."),
         };
-        location.0 += tuple.0;
-        location.1 += tuple.1;
-        points.insert(location);
+        for _ in 1..=rng.gen_range(1..=2) {
+            location.0 += tuple.0;
+            location.1 += tuple.1;
+            points.insert(location);
+        }
     }
     points
 }
 
-fn create_level_connections() {
+fn create_map_connections() {
     const PASSES: u32 = 4;
     let map_shape = create_level_shape(PASSES);
-    let map_size = map_shape.len();
-    let mut base_matrix = DMatrix::<f32>::zeros(map_size, map_size);
-    
+    let mut map:Map =  Map::new(map_shape);
 }
 
-fn only_one_connection(point:(i32,i32),set:HashSet<(i32,i32)>)-> Option<u32> {
-    let (point1,point2)=point;
-    let mut direction = 0u32;
-    let mut connections = 0u32;
-    if set.contains(&(point1,point2+1)){
-        direction=1;
-        connections+=1;
-    };
-    if set.contains(&(point1+1,point2)){
-        direction=2;
-        connections+=1;
-    };
-    if set.contains(&(point1,point2-1)){
-        direction=3;
-        connections+=1;
-    };
-    if set.contains(&(point1-1,point2)){
-        direction=4;
-        connections+=1;
-    };
-    if connections==1{
-        return Some(direction);
+fn create_connections((x,y):(i32,i32),set:&HashSet<(i32,i32)>)->Connections{
+    let mut connections=Connections::new();
+    if set.contains(&(x,y+1)){
+        connections.up=Some((x,y+1))
     }
-    None
+    if set.contains(&(x+1,y)){
+        connections.right=Some((x+1,y))
+    }
+    if set.contains(&(x,y-1)){
+        connections.down=Some((x,y-1))
+    }
+    if set.contains(&(x-1,y)){
+        connections.left=Some((x-1,y))
+    }
+    connections
+}
+
+fn add_connection(coordinate:(i32,i32),rooms:&mut HashMap<(i32,i32), Room>,set:&HashSet<(i32,i32)>){
+    let connections = create_connections(coordinate, set);
+    let mut room=Room::new();
+    room.connections=connections;
+    rooms.insert(coordinate,  room);
+}
+
+fn check_square(coordinate:(i32,i32),map:Map)->bool{
+    let rooms = map.rooms;
+    let room_north= match rooms.get(&coordinate){
+        Some(room) => match room.connections.up{
+            Some(room_north) => room_north,
+            None => return false,
+        },
+        None => return false,
+    };
+    let room_east= match rooms.get(&room_north){
+        Some(room) => match room.connections.right{
+            Some(room_east) => room_east,
+            None => return false,
+        },
+        None => return false,
+    };
+    let room_south= match rooms.get(&room_east){
+        Some(room) => match room.connections.down{
+            Some(room_south) => room_south,
+            None => return false,
+        },
+        None => return false,
+    };
+    let room_west= match rooms.get(&room_south){
+        Some(room) => match room.connections.left{
+            Some(room_west) => room_west,
+            None => return false,
+        },
+        None => return false,
+    };
+    if room_west==coordinate{
+        true
+    } else {
+        false
+    }
+
 }
