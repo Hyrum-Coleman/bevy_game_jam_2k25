@@ -5,7 +5,7 @@ pub(super) fn plugin(app: &mut App) {
     app.configure::<(Damage, OnDamage)>();
 }
 
-#[derive(Component, Reflect, Debug)]
+#[derive(Component, Reflect, Debug, Default)]
 #[reflect(Component)]
 pub struct Damage(pub f32);
 
