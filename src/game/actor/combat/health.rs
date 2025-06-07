@@ -30,3 +30,9 @@ fn handle_death(mut commands: Commands, health_query: Query<(Entity, &Health), C
         commands.entity(entity).despawn();
     }
 }
+
+fn clamp_health(mut health_query: Query<&mut Health, Changed<Health>>) {
+    health_query.iter_mut().for_each(|mut health| {
+        health.current = health.current.clamp(0.0, health.max);
+    });
+}
