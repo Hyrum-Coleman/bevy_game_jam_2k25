@@ -2,7 +2,7 @@ use crate::game::GameLayer;
 use crate::game::actor::ActorAssets;
 use crate::game::actor::camera_cutie::{CameraCutieEvent, send_camera_follow_event};
 use crate::game::actor::enemy::get_enemy;
-use crate::game::actor::movement::spring::{Spring, mass_spring_damper};
+use crate::game::actor::movement::spring::mass_spring_damper;
 use crate::game::actor::player::get_player;
 use crate::prelude::*;
 use crate::screen::Screen;
@@ -65,7 +65,7 @@ pub fn spawn_world(
         DespawnOnExitState::<Level>::default(),
     ));
 
-    let mut player_spawn_commands = commands.spawn((
+    let player_spawn_commands = commands.spawn((
         get_player(actor_assets.rat_handle.clone()),
         Transform::from_xyz(64., 0., -1.),
         DespawnOnExitState::<Level>::default(),
