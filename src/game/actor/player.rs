@@ -4,6 +4,7 @@ use crate::game::actor::combat::damage::Damage;
 use crate::game::actor::combat::health::Health;
 use crate::game::actor::create_entity_aseprite;
 use crate::game::actor::movement::{Movement, MovementController};
+use crate::game::effects::life_steal::LifeSteal;
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
@@ -37,7 +38,14 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
     (
         Name::new("Player"),
         Player,
-        Health::new(100.),
+        Health {
+            max: 500.,
+            current: 100.,
+        },
+        LifeSteal {
+            proc_percent: 1.,
+            steal_percent: 0.5,
+        },
         Movement::new(
             ACCELERATION_RATE_PIXELS,
             DECELERATION_RATE_PIXELS,

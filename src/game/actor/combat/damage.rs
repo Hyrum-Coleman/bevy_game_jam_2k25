@@ -1,4 +1,5 @@
 use crate::game::actor::combat::health::Health;
+use crate::game::effects::life_steal::apply_lifesteal_on_damage;
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
@@ -16,21 +17,30 @@ impl Configure for Damage {
 }
 
 #[derive(Event, Reflect, Debug)]
-pub struct OnDamage(pub f32);
+pub struct OnDamage {
+    pub damage: f32,
+    pub attacker: Entity,
+}
+
+impl OnDamage {
+    pub fn new(damage: f32, attacker: Entity) -> Self {
+        Self { damage, attacker }
+    }
+}
 
 impl Configure for OnDamage {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
-        app.add_observer(on_damage);
+        app.add_observer(decrease_health_on_damage);
         app.add_observer(deal_damage_on_collision);
     }
 }
 
-fn on_damage(trigger: Trigger<OnDamage>, mut health_query: Query<&mut Health>) {
+fn decrease_health_on_damage(trigger: Trigger<OnDamage>, mut health_query: Query<&mut Health>) {
     let target = r!(trigger.get_target());
     let mut target_health = r!(health_query.get_mut(target));
-    target_health.current -= trigger.0;
-    info!("Dealt {} damage", trigger.0);
+    target_health.current -= trigger.damage;
+    info!("Dealt {} damage", trigger.damage);
 }
 
 fn deal_damage_on_collision(
@@ -44,5 +54,7 @@ fn deal_damage_on_collision(
 
     let hit_entity = trigger.collider;
     rq!(health_query.contains(hit_entity));
-    commands.entity(hit_entity).trigger(OnDamage(damage.0));
+    commands
+        .entity(hit_entity)
+        .trigger(OnDamage::new(damage.0, attacker));
 }
