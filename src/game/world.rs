@@ -62,7 +62,6 @@ pub fn spawn_world(
         TiledMapLayerZOffset(5.),
         RigidBody::Static,
         CollisionLayers::new(GameLayer::Wall, LayerMask::ALL),
-        Friction::default(),
         DespawnOnExitState::<Level>::default(),
     ));
 
