@@ -1,4 +1,5 @@
 use super::movement::input::MovementAction;
+use crate::game::actor::combat::damage::Damage;
 use crate::game::actor::create_entity_aseprite;
 use crate::game::actor::movement::{Movement, MovementController};
 use crate::prelude::*;
@@ -41,6 +42,7 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
             1.0,
         ),
         MovementController::default(),
+        Damage(5.),
         InputMap::default()
             .with_dual_axis(MovementAction::Move, GamepadStick::LEFT)
             .with_dual_axis(MovementAction::Move, VirtualDPad::wasd()),
