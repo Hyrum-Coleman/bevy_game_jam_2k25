@@ -1,7 +1,6 @@
 use crate::game::GameLayer;
 use crate::game::actor::ActorAssets;
 use crate::game::actor::camera_cutie::{CameraCutieEvent, send_camera_follow_event};
-use crate::game::actor::combat::damage::Damage;
 use crate::game::actor::enemy::get_enemy;
 use crate::game::actor::movement::spring::Spring;
 use crate::game::actor::player::get_player;
@@ -72,17 +71,6 @@ pub fn spawn_world(
         Transform::from_xyz(64., 0., -1.),
         DespawnOnExitState::<Level>::default(),
     ));
-    player_spawn_commands.with_children(|children| {
-        children.spawn((
-            Name::new("Player Collider"),
-            CollisionLayers::new(GameLayer::Player, LayerMask::ALL),
-            Collider::rectangle(32., 16.),
-            Transform::from_xyz(0.0, -24.0, 0.0),
-            ColliderDensity(5.0),
-            CollisionEventsEnabled,
-            Damage(5.),
-        ));
-    });
 
     send_camera_follow_event(player_spawn_commands.id(), set_camera_event);
 

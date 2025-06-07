@@ -1,4 +1,6 @@
 use super::movement::input::MovementAction;
+use crate::game::GameLayer;
+use crate::game::actor::combat::damage::Damage;
 use crate::game::actor::create_entity_aseprite;
 use crate::game::actor::movement::{Movement, MovementController};
 use crate::prelude::*;
@@ -44,6 +46,15 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
         InputMap::default()
             .with_dual_axis(MovementAction::Move, GamepadStick::LEFT)
             .with_dual_axis(MovementAction::Move, VirtualDPad::wasd()),
+        children![(
+            Name::new("Player Collider"),
+            CollisionLayers::new(GameLayer::Player, LayerMask::ALL),
+            Collider::rectangle(32., 16.),
+            Transform::from_xyz(0.0, -24.0, 0.0),
+            ColliderDensity(5.0),
+            CollisionEventsEnabled,
+            Damage(5.),
+        )],
         create_entity_aseprite(texture),
     )
 }
