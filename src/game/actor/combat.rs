@@ -1,5 +1,6 @@
 pub mod damage;
 pub mod health;
+pub mod heal;
 
 use crate::prelude::*;
 

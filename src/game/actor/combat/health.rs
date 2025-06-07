@@ -14,7 +14,13 @@ pub struct Health {
 impl Configure for Health {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
-        app.add_systems(Update, handle_death.in_set(UpdateSystems::Update));
+        app.add_systems(
+            Update,
+            (
+                handle_death.in_set(UpdateSystems::Update),
+                clamp_health.in_set(UpdateSystems::SyncLate),
+            ),
+        );
     }
 }
 
