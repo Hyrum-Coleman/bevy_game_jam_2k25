@@ -45,10 +45,7 @@ impl Spring {
 pub fn mass_spring_damper(m: f32, k: f32, b: f32, pos: Vec2) -> impl Bundle {
     (
         Mass(m),
-        Spring {
-            stiffness: k,
-            offset: pos,
-        },
+        Spring::default().with_stiffness(k).with_offset(pos),
         LinearDamping(b),
     )
 }
