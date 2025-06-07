@@ -28,13 +28,13 @@ impl Configure for OnDamage {
 
 fn on_damage(trigger: Trigger<OnDamage>, mut health_query: Query<&mut Health>) {
     let target = r!(trigger.get_target());
-    let target_health = r!(health_query.get_mut(target));
+    let mut target_health = r!(health_query.get_mut(target));
     target_health.current -= trigger.0;
 }
 
 fn deal_damage_on_collision(
-    mut commands: Commands,
     trigger: Trigger<OnCollisionStart>,
+    mut commands: Commands,
     damage_query: Query<&Damage>,
     health_query: Query<(), With<Health>>,
 ) {
