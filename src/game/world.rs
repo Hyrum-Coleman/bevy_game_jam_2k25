@@ -75,19 +75,19 @@ pub fn spawn_world(
     player_spawn_commands.with_children(|children| {
         children.spawn((
             Name::new("Player Collider"),
-        CollisionLayers::new(GameLayer::Player, LayerMask::ALL),
-        Collider::rectangle(32., 16.),
-        Transform::from_xyz(0.0, -24.0, 0.0),
-        ColliderDensity(5.0),
-        CollisionEventsEnabled,
-        Damage(5.),
-    ));
-});
+            CollisionLayers::new(GameLayer::Player, LayerMask::ALL),
+            Collider::rectangle(32., 16.),
+            Transform::from_xyz(0.0, -24.0, 0.0),
+            ColliderDensity(5.0),
+            CollisionEventsEnabled,
+            Damage(5.),
+        ));
+    });
 
-send_camera_follow_event(player_spawn_commands.id(), set_camera_event);
+    send_camera_follow_event(player_spawn_commands.id(), set_camera_event);
 
-commands.spawn((
-get_enemy("Orc", actor_assets.orc_image.clone()),
+    commands.spawn((
+        get_enemy("Orc", actor_assets.orc_image.clone()),
         LinearDamping(4000.),
         Mass(100.),
         Spring::default()
