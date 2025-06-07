@@ -22,6 +22,7 @@ impl Configure for OnDamage {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
         app.add_observer(on_damage);
+        app.add_observer(deal_damage_on_collision);
     }
 }
 
@@ -37,5 +38,13 @@ fn deal_damage_on_collision(
     damage_query: Query<&Damage>,
     health_query: Query<(), With<Health>>,
 ) {
-    
+    let target = r!(trigger.get_target());
+    let damage = rq!(damage_query.get(target));
+
+    let hurtbox = trigger.body.unwrap_or(trigger.collider);
+    rq!(health_query.contains(hurtbox));
+    commands.entity(target).try_despawn();
+    commands.entity(hurtbox).trigger(OnDamage(damage.0));
+
+    info!("Dealt {} damage", damage.0);
 }
