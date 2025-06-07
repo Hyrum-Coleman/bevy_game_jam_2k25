@@ -2,10 +2,10 @@ use crate::prelude::*;
 
 pub mod actor;
 pub mod world;
-mod item;
+mod effects;
 
 pub(super) fn plugin(app: &mut App) {
-    app.add_plugins((actor::plugin, world::plugin, item::plugin));
+    app.add_plugins((actor::plugin, world::plugin, effects::plugin));
 }
 
 #[derive(PhysicsLayer, Default)]
