@@ -16,3 +16,9 @@ impl Configure for Health {
         app.register_type::<Self>();
     }
 }
+
+impl Health {
+    pub fn new(max: f32) -> Self {
+        Self { max, current: max }
+    }
+}
