@@ -955,6 +955,7 @@ dependencies = [
  "lazy-regex",
  "leafwing-input-manager",
  "log",
+ "nalgebra",
  "pyri_state",
  "pyri_tooltip",
  "rand 0.8.5",

@@ -7,8 +7,11 @@ use crate::game::actor::player::get_player;
 use crate::prelude::*;
 use crate::screen::Screen;
 
+pub mod level_gen;
+
 pub(super) fn plugin(app: &mut App) {
     app.configure::<(LevelAssets, Level)>();
+    app.add_plugins(level_gen::plugin);
 }
 
 #[derive(AssetCollection, Resource, Reflect, Default, Debug)]
