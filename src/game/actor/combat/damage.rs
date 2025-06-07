@@ -2,7 +2,7 @@ use crate::game::actor::combat::health::Health;
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
-    app.configure::<Damage>();
+    app.configure::<(Damage, OnDamage)>();
 }
 
 #[derive(Component, Reflect, Debug)]
@@ -30,6 +30,7 @@ fn on_damage(trigger: Trigger<OnDamage>, mut health_query: Query<&mut Health>) {
     let target = r!(trigger.get_target());
     let mut target_health = r!(health_query.get_mut(target));
     target_health.current -= trigger.0;
+    info!("Dealt {} damage", trigger.0);
 }
 
 fn deal_damage_on_collision(
@@ -45,6 +46,4 @@ fn deal_damage_on_collision(
     rq!(health_query.contains(hurtbox));
     commands.entity(target).try_despawn();
     commands.entity(hurtbox).trigger(OnDamage(damage.0));
-
-    info!("Dealt {} damage", damage.0);
 }

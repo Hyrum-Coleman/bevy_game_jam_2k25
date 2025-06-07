@@ -1,6 +1,7 @@
 use crate::game::GameLayer;
 use crate::game::actor::ActorAssets;
 use crate::game::actor::camera_cutie::{CameraCutieEvent, send_camera_follow_event};
+use crate::game::actor::combat::damage::Damage;
 use crate::game::actor::enemy::get_enemy;
 use crate::game::actor::movement::spring::Spring;
 use crate::game::actor::player::get_player;
@@ -77,6 +78,7 @@ pub fn spawn_world(
             Collider::rectangle(32., 16.),
             Transform::from_xyz(0.0, -24.0, 0.0),
             ColliderDensity(5.0),
+            Damage(5.),
         ));
     });
 
