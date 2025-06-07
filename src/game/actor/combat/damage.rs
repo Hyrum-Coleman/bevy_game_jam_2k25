@@ -39,11 +39,10 @@ fn deal_damage_on_collision(
     damage_query: Query<&Damage>,
     health_query: Query<(), With<Health>>,
 ) {
-    let target = r!(trigger.get_target());
-    let damage = rq!(damage_query.get(target));
+    let attacker = r!(trigger.get_target());
+    let damage = r!(damage_query.get(attacker));
 
-    let hurtbox = trigger.body.unwrap_or(trigger.collider);
-    rq!(health_query.contains(hurtbox));
-    commands.entity(target).try_despawn();
-    commands.entity(hurtbox).trigger(OnDamage(damage.0));
+    let hit_entity = trigger.collider;
+    rq!(health_query.contains(hit_entity));
+    commands.entity(hit_entity).trigger(OnDamage(damage.0));
 }
