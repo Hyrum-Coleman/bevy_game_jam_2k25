@@ -105,6 +105,20 @@
         "Dungeon/Hall/map_TRBL.tmx#Town Tileset": {
             "scaleInDock": 1
         },
+        "Dungeon/Hall/map_TxxL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Hall/map_TxxL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Hall/map_TxxL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
         "Dungeon/Hall/map_xRBL.tmx": {
             "scale": 1.07171875,
             "selectedLayer": 0,
