@@ -1,0 +1,315 @@
+{
+    "activeFile": "Dungeon/Boss/MapxxxL.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "Courtyard/Empty/map_TxBx.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Courtyard/Empty/map_TxBx.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Courtyard/Empty/map_TxBx.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Courtyard/Empty/map_xRBL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Courtyard/Empty/map_xRBL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Courtyard/Empty/map_xRBL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Boss/MapxxxL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Boss/MapxxxL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Boss/MapxxxL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Empty/MapxxBL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Empty/MapxxBL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Empty/MapxxBL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Empty/map_TRBL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Empty/map_TRBL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Empty/map_TRBL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Empty/map_TRxx.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Empty/map_TRxx.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Empty/map_TRxx.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Empty/map_TxBx.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Empty/map_TxBx.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Empty/map_TxBx.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Empty/map_xRBL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Empty/map_xRBL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Empty/map_xRBL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Hall/MapTxBx.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Hall/MapTxBx.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Hall/MapTxBx.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Hall/MapxxxL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Hall/MapxxxL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Hall/MapxxxL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Hall/map_TRBL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Hall/map_TRBL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Hall/map_TRBL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Hall/map_TxxL.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 445.99999999999994,
+                "y": 390
+            }
+        },
+        "Dungeon/Hall/map_TxxL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Hall/map_TxxL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Hall/map_xRBL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Hall/map_xRBL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Hall/map_xRBL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Medium/MapTxBL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Medium/MapTxBL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Medium/MapTxBL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Medium/MapxxxL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Medium/MapxxxL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Medium/MapxxxL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Medium/map_TRBL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Medium/map_TRBL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 2
+        },
+        "Dungeon/Medium/map_TRBL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Medium/map_TxBx.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 535.6666666666666,
+                "y": 401
+            }
+        },
+        "Dungeon/Medium/map_TxBx.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Medium/map_TxBx.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Medium/map_xRBL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Medium/map_xRBL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Medium/map_xRBL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/RoomEmpty/map_TRBL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/RoomEmpty/map_TRBL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/RoomEmpty/map_TRBL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapTxBx.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Treasure/MapTxBx.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapTxBx.tmx#Town Tileset": {
+            "scaleInDock": 1
+        }
+    },
+    "openFiles": [
+        "Dungeon/Medium/MapxxxL.tmx",
+        "Dungeon/Hall/MapxxxL.tmx",
+        "Dungeon/Hall/MapTxBx.tmx",
+        "Dungeon/Empty/MapxxBL.tmx",
+        "Dungeon/Medium/MapTxBL.tmx",
+        "Dungeon/Treasure/MapTxBx.tmx",
+        "Dungeon/Boss/MapxxxL.tmx"
+    ],
+    "project": "maps.tiled-project",
+    "recentFiles": [
+        "Dungeon/Medium/MapxxxL.tmx",
+        "Dungeon/Hall/MapxxxL.tmx",
+        "Dungeon/Hall/MapTxBx.tmx",
+        "Dungeon/Empty/MapxxBL.tmx",
+        "Dungeon/Medium/MapTxBL.tmx",
+        "Dungeon/Treasure/MapTxBx.tmx",
+        "Dungeon/Boss/MapxxxL.tmx",
+        "Dungeon/Hall/map_TxxL.tmx",
+        "Dungeon/Hall/map_xRBL.tmx",
+        "Dungeon/Hall/map_TRBL.tmx",
+        "Dungeon/Medium/map_TRBL.tmx",
+        "Dungeon/Medium/map_TxBx.tmx"
+    ]
+}
