@@ -3,7 +3,7 @@ use crate::game::actor::combat::heal::OnHeal;
 use crate::game::actor::combat::health::Health;
 use crate::prelude::*;
 
-pub(super) fn plugin(app: &mut App) {
+pub(in crate::game) fn plugin(app: &mut App) {
     app.configure::<(LifeSteal, OnLifeSteal)>();
 }
 

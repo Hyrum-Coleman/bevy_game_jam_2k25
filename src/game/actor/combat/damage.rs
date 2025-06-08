@@ -1,5 +1,5 @@
 use crate::game::actor::combat::health::Health;
-use crate::game::effects::life_steal::apply_lifesteal_on_damage;
+use crate::game::item::effects::life_steal::apply_lifesteal_on_damage;
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {

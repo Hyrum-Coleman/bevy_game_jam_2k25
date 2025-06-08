@@ -4,8 +4,8 @@ use crate::game::actor::combat::damage::Damage;
 use crate::game::actor::combat::health::Health;
 use crate::game::actor::create_entity_aseprite;
 use crate::game::actor::movement::{Movement, MovementController};
-use crate::game::effects::fire::AppliesFire;
-use crate::game::effects::life_steal::LifeSteal;
+use crate::game::item::effects::fire::AppliesFire;
+use crate::game::item::effects::life_steal::LifeSteal;
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
