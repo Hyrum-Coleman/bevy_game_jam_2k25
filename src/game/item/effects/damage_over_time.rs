@@ -115,6 +115,8 @@ pub fn dot_tick_system(
             continue;
         }
 
-        commands.entity(entity).trigger(OnDamage::new(effect.damage, None));
+        commands
+            .entity(entity)
+            .trigger(OnDamage::new(effect.damage, None));
     }
 }
