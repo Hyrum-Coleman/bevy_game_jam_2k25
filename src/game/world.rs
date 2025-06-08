@@ -61,7 +61,7 @@ pub fn spawn_world(
     actor_assets: Res<ActorAssets>,
     set_camera_event: EventWriter<CameraCutieEvent>,
 ) {
-    Map::shaped(5).save_world_file();
+    Map::shaped(50).save_world_file();
     commands.spawn((
         TiledWorldHandle(world_assets.dungeon_assets.clone()),
         TilemapAnchor::Center,

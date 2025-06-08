@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
@@ -132,12 +134,12 @@ impl Map {
             let map = room.create_room_info(self.world_type, coordiate);
             maps.push(map);
         }
-        WorldData::new(maps, true, "world")
+        WorldData::new(maps, false, "world")
     }
     pub fn save_world_file(&self) {
         let world_data = self.create_world_info();
         let world_type = self.world_type;
-        let json = serde_json::to_string(&world_data).expect("Aaron Made Bad Struct");
+        let json = serde_json::to_string_pretty(&world_data).expect("Aaron Made Bad Struct");
         std::fs::write(format!("assets/maps/{}.world", world_type), json)
             .expect("File System Failed");
     }
@@ -231,7 +233,7 @@ impl Room {
         const HEIGHT: i32 = 640;
         const WIDTH: i32 = 960;
         let file_name = self.create_room_path(world_type);
-        MapData::new(file_name, HEIGHT, WIDTH, x * WIDTH, y * HEIGHT)
+        MapData::new(file_name, HEIGHT, WIDTH, x * WIDTH, -y * HEIGHT)
     }
 }
 
@@ -270,6 +272,7 @@ fn create_level_shape(passes: u32) -> HashSet<(i32, i32)> {
     let mut points: HashSet<(i32, i32)> = HashSet::new();
     let mut location = (0, 0);
     let mut rng = rand::thread_rng();
+    points.insert((0,0));
     for _ in 1..=passes {
         let value = rng.gen_range(1..=4);
         let tuple = match value {
