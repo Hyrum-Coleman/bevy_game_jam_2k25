@@ -30,7 +30,6 @@ impl Configure for OnLifeSteal {
     }
 }
 
-
 pub fn apply_lifesteal_on_damage(
     mut trigger: Trigger<OnDamage>,
     mut commands: Commands,

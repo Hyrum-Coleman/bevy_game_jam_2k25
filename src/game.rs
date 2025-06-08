@@ -1,9 +1,9 @@
-use item::effects;
 use crate::prelude::*;
+use item::effects;
 
 pub mod actor;
-pub mod world;
 pub mod item;
+pub mod world;
 
 pub(super) fn plugin(app: &mut App) {
     app.add_plugins((actor::plugin, world::plugin, item::plugin));

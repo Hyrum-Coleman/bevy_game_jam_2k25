@@ -1,6 +1,6 @@
+pub mod damage_over_time;
 pub mod fire;
 pub mod life_steal;
-pub mod damage_over_time;
 
 use crate::prelude::*;
 
