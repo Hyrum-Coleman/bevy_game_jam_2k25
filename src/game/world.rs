@@ -61,19 +61,22 @@ pub fn spawn_world(
     actor_assets: Res<ActorAssets>,
     set_camera_event: EventWriter<CameraCutieEvent>,
 ) {
-    Map::shaped(50).save_world_file();
+    let map = Map::shaped(50);
+    map.save_world_file();
+    let y_offset = map.y_offset();
     commands.spawn((
         TiledWorldHandle(world_assets.dungeon_assets.clone()),
-        TilemapAnchor::Center,
+        TilemapAnchor::None,
         TiledMapLayerZOffset(0.),
         RigidBody::Static,
         CollisionLayers::new(GameLayer::Wall, LayerMask::ALL),
         DespawnOnExitState::<Level>::default(),
+        Transform::from_xyz(0., y_offset, 0.),
     ));
 
     let player_spawn_commands = commands.spawn((
         get_player(actor_assets.rat_handle.clone()),
-        Transform::from_xyz(64., 0., 5.),
+        Transform::from_xyz(480., 320., 5.),
         DespawnOnExitState::<Level>::default(),
     ));
 

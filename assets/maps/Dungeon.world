@@ -1,354 +1,291 @@
 {
   "maps": [
     {
-      "fileName": "Dungeon/RoomEmpty/MapTRBx.tmx",
+      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
       "height": 640,
       "width": 960,
       "x": 0,
       "y": 0
     },
     {
-      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -7680,
-      "y": 640
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -3840,
-      "y": 1280
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -6720,
-      "y": 2560
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRxx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -4800,
-      "y": 1920
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -7680,
-      "y": 0
-    },
-    {
       "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
       "height": 640,
       "width": 960,
-      "x": -9600,
-      "y": 3200
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxxxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": 960,
-      "y": 1920
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -960,
-      "y": 1280
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -8640,
-      "y": 3200
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRBL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -3840,
-      "y": -1920
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -6720,
+      "x": 4800,
       "y": -2560
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -4800,
-      "y": -2560
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -11520,
-      "y": 3200
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxxxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": 960,
-      "y": 0
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxxxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -2880,
-      "y": -1920
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxBL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -3840,
-      "y": -1280
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -10560,
-      "y": 3200
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -7680,
-      "y": -640
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -1920,
-      "y": 1920
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -3840,
-      "y": 0
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -6720,
-      "y": 1920
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -5760,
-      "y": 3200
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": 0,
-      "y": 1920
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -5760,
-      "y": -1920
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTRxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -960,
-      "y": 1920
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -5760,
-      "y": 2560
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTRxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": 0,
-      "y": 640
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -3840,
-      "y": 640
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTRxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -4800,
-      "y": -1920
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTxxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -6720,
-      "y": -1280
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxxBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -6720,
-      "y": -3200
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTRxx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -7680,
-      "y": 1280
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapTRxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -3840,
-      "y": 1920
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": 0,
-      "y": -640
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -7680,
-      "y": 3200
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRxx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -7680,
-      "y": -1920
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -960,
-      "y": 640
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -12480,
-      "y": 3200
     },
     {
       "fileName": "Dungeon/RoomEmpty/MapTxxx.tmx",
       "height": 640,
       "width": 960,
-      "x": -12480,
-      "y": 3840
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxRBx.tmx",
-      "height": 640,
-      "width": 960,
-      "x": -7680,
-      "y": -1280
-    },
-    {
-      "fileName": "Dungeon/RoomEmpty/MapxxxL.tmx",
-      "height": 640,
-      "width": 960,
-      "x": 960,
-      "y": 640
+      "x": 4800,
+      "y": -640
     },
     {
       "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
       "height": 640,
       "width": 960,
-      "x": -2880,
-      "y": 1920
+      "x": 960,
+      "y": -3200
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 11520,
+      "y": -5120
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTRxL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 15360,
+      "y": -5120
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRBx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 5760,
+      "y": -3200
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 14400,
+      "y": -5120
     },
     {
       "fileName": "Dungeon/RoomEmpty/MapxxBx.tmx",
       "height": 640,
       "width": 960,
-      "x": -4800,
+      "x": 15360,
+      "y": -6400
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTRBx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 3840,
+      "y": -2560
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 9600,
+      "y": -4480
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxxx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 7680,
+      "y": -2560
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxxx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 2880,
+      "y": -2560
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 6720,
       "y": -3200
     },
     {
-      "fileName": "Dungeon/RoomEmpty/MapTRBL.tmx",
+      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
       "height": 640,
       "width": 960,
-      "x": -6720,
+      "x": 9600,
+      "y": -3840
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRBx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 0,
+      "y": -3200
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 0,
+      "y": -1280
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 13440,
+      "y": -5120
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRBL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 4800,
       "y": -1920
     },
     {
-      "fileName": "Dungeon/RoomEmpty/MapxRxx.tmx",
+      "fileName": "Dungeon/RoomEmpty/MapTRxx.tmx",
       "height": 640,
       "width": 960,
-      "x": -4800,
+      "x": 3840,
+      "y": -1920
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 8640,
+      "y": -3200
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxxx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 0,
+      "y": 1920
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 15360,
+      "y": -5760
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 1920,
+      "y": -3200
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 10560,
+      "y": -5120
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 0,
+      "y": 640
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 0,
+      "y": -2560
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 0,
+      "y": -640
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRBL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 2880,
+      "y": -3200
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxxL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 5760,
+      "y": -1920
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRBL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 7680,
+      "y": -3200
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxxxL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 16320,
+      "y": -5120
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRBL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 3840,
+      "y": -3200
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 4800,
       "y": -1280
     },
     {
       "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
       "height": 640,
       "width": 960,
-      "x": -3840,
-      "y": -640
+      "x": 0,
+      "y": 1280
     },
     {
       "fileName": "Dungeon/RoomEmpty/MapxxxL.tmx",
       "height": 640,
       "width": 960,
-      "x": 960,
-      "y": -640
+      "x": 4800,
+      "y": -3200
     },
     {
-      "fileName": "Dungeon/RoomEmpty/MapTRxL.tmx",
+      "fileName": "Dungeon/RoomEmpty/MapTxxL.tmx",
       "height": 640,
       "width": 960,
-      "x": -6720,
-      "y": 3200
+      "x": 9600,
+      "y": -3200
     },
     {
-      "fileName": "Dungeon/RoomEmpty/MapxxBL.tmx",
+      "fileName": "Dungeon/RoomEmpty/MapxRBx.tmx",
       "height": 640,
       "width": 960,
-      "x": -6720,
-      "y": 1280
+      "x": 9600,
+      "y": -5120
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapxRxL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 12480,
+      "y": -5120
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxBL.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 5760,
+      "y": -2560
+    },
+    {
+      "fileName": "Dungeon/RoomEmpty/MapTxBx.tmx",
+      "height": 640,
+      "width": 960,
+      "x": 0,
+      "y": -1920
     }
   ],
   "onlyShowAdjacentMaps": false,

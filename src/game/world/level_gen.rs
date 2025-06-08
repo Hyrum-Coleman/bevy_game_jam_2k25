@@ -47,7 +47,7 @@ impl std::fmt::Display for WorldType {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Map {
     rooms: HashMap<(i32, i32), Room>,
     world_type: WorldType,
@@ -143,6 +143,16 @@ impl Map {
         std::fs::write(format!("assets/maps/{}.world", world_type), json)
             .expect("File System Failed");
     }
+    pub fn y_offset(&self) -> f32 {
+        const HEIGHT: i32 = 640;
+        let mut lowest_y = 0;
+        for ((_, y), _) in &self.rooms {
+            if y < &lowest_y {
+                lowest_y = *y;
+            }
+        }
+        (lowest_y * HEIGHT) as f32
+    }
 }
 
 #[derive(Copy, Clone, Debug, Default)]
@@ -161,7 +171,7 @@ impl std::fmt::Display for RoomType {
     }
 }
 
-#[derive(Clone, Default)]
+#[derive(Clone, Default, Debug)]
 struct Room {
     connections: Connections,
     room_type: RoomType,
@@ -237,7 +247,7 @@ impl Room {
     }
 }
 
-#[derive(Clone, Default)]
+#[derive(Clone, Default, Debug)]
 struct Connections {
     left: Option<(i32, i32)>,
     right: Option<(i32, i32)>,
@@ -272,7 +282,7 @@ fn create_level_shape(passes: u32) -> HashSet<(i32, i32)> {
     let mut points: HashSet<(i32, i32)> = HashSet::new();
     let mut location = (0, 0);
     let mut rng = rand::thread_rng();
-    points.insert((0,0));
+    points.insert((0, 0));
     for _ in 1..=passes {
         let value = rng.gen_range(1..=4);
         let tuple = match value {
