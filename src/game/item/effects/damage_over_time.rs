@@ -110,13 +110,13 @@ pub fn dot_tick_system(
             continue;
         }
 
-        if effect.remaining <= f32::EPSILON {
-            commands.entity(entity).remove::<ActiveDOT>();
-            continue;
-        }
-
         commands
             .entity(entity)
             .trigger(OnDamage::new(effect.damage, None));
+
+        if effect.remaining < 0.0 {
+            commands.entity(entity).remove::<ActiveDOT>();
+            continue;
+        }
     }
 }
