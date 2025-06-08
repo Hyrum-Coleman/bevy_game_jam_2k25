@@ -40,7 +40,6 @@ fn decrease_health_on_damage(trigger: Trigger<OnDamage>, mut health_query: Query
     let target = r!(trigger.get_target());
     let mut target_health = r!(health_query.get_mut(target));
     target_health.current -= trigger.damage;
-    info!("Dealt {} damage", trigger.damage);
 }
 
 fn deal_damage_on_collision(

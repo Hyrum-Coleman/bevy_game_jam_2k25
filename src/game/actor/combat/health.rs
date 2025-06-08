@@ -31,14 +31,16 @@ impl Health {
 }
 
 fn handle_death(mut commands: Commands, health_query: Query<(Entity, &Health), Changed<Health>>) {
-    for (entity, health) in health_query {
-        rq!(health.current <= f32::EPSILON);
+    for (entity, health) in &health_query {
+        if health.current >= f32::EPSILON {
+            continue;
+        }
         commands.entity(entity).despawn();
     }
 }
 
-fn clamp_health(mut health_query: Query<&mut Health, Changed<Health>>) {
-    health_query.iter_mut().for_each(|mut health| {
+fn clamp_health(mut health_query: Query<(&mut Health), Changed<Health>>) {
+    health_query.iter_mut().for_each(|(mut health)| {
         health.current = health.current.clamp(0.0, health.max);
     });
 }
