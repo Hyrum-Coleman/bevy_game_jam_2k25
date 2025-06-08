@@ -1,10 +1,10 @@
-use crate::game::world::level_gen::Map;
 use crate::game::GameLayer;
 use crate::game::actor::ActorAssets;
 use crate::game::actor::camera_cutie::{CameraCutieEvent, send_camera_follow_event};
 use crate::game::actor::enemy::get_enemy;
 use crate::game::actor::movement::spring::Spring;
 use crate::game::actor::player::get_player;
+use crate::game::world::level_gen::Map;
 use crate::prelude::*;
 use crate::screen::Screen;
 
