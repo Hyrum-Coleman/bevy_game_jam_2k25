@@ -1,4 +1,5 @@
 use crate::game::actor::combat::health::Health;
+use crate::game::item::effects::damage_over_time::OnDamageOverTime;
 use crate::prelude::*;
 
 pub(in crate::game) fn plugin(app: &mut App) {
@@ -44,7 +45,6 @@ pub struct StartFire;
 impl Configure for StartFire {
     fn configure(app: &mut App) {
         app.register_type::<Self>();
-        app.add_observer(decrease_health_on_fire);
         app.add_observer(start_fire_on_collision);
     }
 }
@@ -54,6 +54,7 @@ fn start_fire_on_collision(
     mut commands: Commands,
     fire_query: Query<&AppliesFire>,
     health_query: Query<(), With<Health>>,
+    mut sprite_query: Query<&mut Sprite>,
 ) {
     let attacker = r!(trigger.get_target());
     let fire = r!(fire_query.get(attacker));
@@ -62,12 +63,14 @@ fn start_fire_on_collision(
 
     let hit_entity = trigger.collider;
     rq!(health_query.contains(hit_entity));
-    commands.entity(hit_entity).trigger(StartFire);
-}
 
-fn decrease_health_on_fire(trigger: Trigger<StartFire>, mut health_query: Query<&mut Health>) {
-    info!("Fire proc");
-    // let target = r!(trigger.get_target());
-    // let mut target_health = r!(health_query.get_mut(target));
-    // target_health.current -= FIRE_DAMAGE;
+    let mut sprite = r!(sprite_query.get_mut(hit_entity));
+
+    sprite.color = sprite.color.mix(&Color::srgba(1.0, 0.65, 0.0, 1.0), 0.65);
+
+    commands.entity(hit_entity).trigger(OnDamageOverTime {
+        damage: FIRE_DAMAGE,
+        duration: 2.0,
+        interval: 0.5,
+    });
 }
