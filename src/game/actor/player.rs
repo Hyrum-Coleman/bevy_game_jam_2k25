@@ -4,6 +4,7 @@ use crate::game::actor::combat::damage::Damage;
 use crate::game::actor::combat::health::Health;
 use crate::game::actor::create_entity_aseprite;
 use crate::game::actor::movement::{Movement, MovementController};
+use crate::game::effects::fire::AppliesFire;
 use crate::game::effects::life_steal::LifeSteal;
 use crate::prelude::*;
 
@@ -63,6 +64,7 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
             Transform::from_xyz(0.0, -24.0, 0.0),
             ColliderDensity(5.0),
             CollisionEventsEnabled,
+            AppliesFire::new(1.0),
             Damage(5.),
         )],
         create_entity_aseprite(texture),
