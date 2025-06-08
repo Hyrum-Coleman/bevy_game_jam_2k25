@@ -1,5 +1,5 @@
 {
-    "activeFile": "Dungeon/Boss/MapxxxL.tmx",
+    "activeFile": "Dungeon/Treasure/MapxRxL.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -47,6 +47,20 @@
             "scaleInDock": 1
         },
         "Dungeon/Boss/MapxxxL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Empty/MapTRxx.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.33333333333337,
+                "y": 319.66666666666663
+            }
+        },
+        "Dungeon/Empty/MapTRxx.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Empty/MapTRxx.tmx#Town Tileset": {
             "scaleInDock": 1
         },
         "Dungeon/Empty/MapxxBL.tmx": {
@@ -286,30 +300,123 @@
         },
         "Dungeon/Treasure/MapTxBx.tmx#Town Tileset": {
             "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapTxxx.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Treasure/MapTxxx.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapTxxx.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapxRxL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Treasure/MapxRxL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapxRxL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapxRxx.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Treasure/MapxRxx.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapxRxx.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapxxBL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Treasure/MapxxBL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapxxBL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapxxBx.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Treasure/MapxxBx.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapxxBx.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapxxxL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Treasure/MapxxxL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/MapxxxL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/Mapxxxx.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Treasure/Mapxxxx.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Treasure/Mapxxxx.tmx#Town Tileset": {
+            "scaleInDock": 1
         }
     },
     "openFiles": [
-        "Dungeon/Medium/MapxxxL.tmx",
-        "Dungeon/Hall/MapxxxL.tmx",
-        "Dungeon/Hall/MapTxBx.tmx",
-        "Dungeon/Empty/MapxxBL.tmx",
-        "Dungeon/Medium/MapTxBL.tmx",
         "Dungeon/Treasure/MapTxBx.tmx",
-        "Dungeon/Boss/MapxxxL.tmx"
+        "Dungeon/Treasure/MapxRxL.tmx"
     ],
     "project": "maps.tiled-project",
     "recentFiles": [
-        "Dungeon/Medium/MapxxxL.tmx",
-        "Dungeon/Hall/MapxxxL.tmx",
-        "Dungeon/Hall/MapTxBx.tmx",
-        "Dungeon/Empty/MapxxBL.tmx",
-        "Dungeon/Medium/MapTxBL.tmx",
         "Dungeon/Treasure/MapTxBx.tmx",
+        "Dungeon/Treasure/MapxRxL.tmx",
+        "Dungeon/Treasure/MapTxxx.tmx",
+        "Dungeon/Treasure/MapxxxL.tmx",
+        "Dungeon/Treasure/Mapxxxx.tmx",
+        "Dungeon/Treasure/MapxxBL.tmx",
+        "Dungeon/Treasure/MapxxBx.tmx",
+        "Dungeon/Treasure/MapxRxx.tmx",
+        "Dungeon/Empty/MapTRxx.tmx",
         "Dungeon/Boss/MapxxxL.tmx",
-        "Dungeon/Hall/map_TxxL.tmx",
-        "Dungeon/Hall/map_xRBL.tmx",
-        "Dungeon/Hall/map_TRBL.tmx",
-        "Dungeon/Medium/map_TRBL.tmx",
-        "Dungeon/Medium/map_TxBx.tmx"
+        "Dungeon/Medium/MapTxBL.tmx",
+        "Dungeon/Empty/MapxxBL.tmx"
     ]
 }
