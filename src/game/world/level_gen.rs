@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use nalgebra::{Const, DMatrix, Matrix, Matrix3, dmatrix, matrix};
+use nalgebra::{coordinates, dmatrix, matrix, Const, DMatrix, Matrix, Matrix3};
 
 pub(super) fn plugin(app: &mut App) {
     app.configure::<LevelGenerator>();
@@ -15,6 +15,26 @@ impl Configure for LevelGenerator {
     }
 }
 
+#[derive(PartialEq,Clone)]
+enum Direction{
+    Left,
+    Right,
+    Up,
+    Down
+}
+
+impl Direction{
+    fn flip(&self)->Self{
+        match self{
+            Direction::Left => Direction::Right,
+            Direction::Right => Direction::Left,
+            Direction::Up => Direction::Down,
+            Direction::Down => Direction::Up,
+        }
+    }
+}
+
+#[derive(Clone)]
 struct Map{
     rooms:HashMap<(i32,i32),Room>,
 }
@@ -27,7 +47,39 @@ impl Map{
         }
         Self { rooms }
     }
+    fn cut_square_connections(&mut self){
+        let mut rng = rand::thread_rng();
+        for ((x,y),_) in self.rooms.clone(){
+            if check_square((x,y), self.clone()){
+                let value = rng.gen_range(1..=4);
+                let (room_location,direction)=match value {
+                    1=>((x,y),Direction::Up),
+                    2=>((x,y+1),Direction::Right),
+                    3=>((x+1,y+1),Direction::Down),
+                    4=>((x+1,y),Direction::Left),
+                    _=> panic!("Random Number Generator generated out of range.")
+                };
+                self.disconnect_rooms(room_location, direction);
+                
+            }
+        }
+    }
+    //Use only if it is assured that the rooms in question exist
+    fn disconnect_rooms(&mut self,(x,y):(i32,i32),direction:Direction) {
+        let main_room = r!(self.rooms.get_mut(&(x,y)));
+        main_room.disconnect_one_side(direction.clone());
+        let room_two_location = match direction{
+            Direction::Left => (x-1,y),
+            Direction::Right => (x+1,y),
+            Direction::Up => (x,y+1),
+            Direction::Down => (x,y-1),
+        };
+        let room_two = r!(self.rooms.get_mut(&room_two_location));
+        room_two.disconnect_one_side(direction.flip());
+    }   
 }
+
+#[derive(Clone)]
 struct Room {
     connections: Connections,
 }
@@ -36,8 +88,18 @@ impl Room{
     fn new()->Self{
         Room { connections: Connections::new() }
     }
+    fn disconnect_one_side(&mut self,direction:Direction){
+        match direction{
+            Direction::Left => self.connections.left=None,
+            Direction::Right => self.connections.right=None,
+            Direction::Up => self.connections.up=None,
+            Direction::Down => self.connections.down=None,
+        }
+    }
+
 }
 
+#[derive(Clone)]
 struct Connections{
     left:Option<(i32,i32)>,
     right:Option<(i32,i32)>,
@@ -77,6 +139,7 @@ fn create_map_connections() {
     const PASSES: u32 = 4;
     let map_shape = create_level_shape(PASSES);
     let mut map:Map =  Map::new(map_shape);
+    map.cut_square_connections();
 }
 
 fn create_connections((x,y):(i32,i32),set:&HashSet<(i32,i32)>)->Connections{
@@ -140,3 +203,4 @@ fn check_square(coordinate:(i32,i32),map:Map)->bool{
     }
 
 }
+
