@@ -11,14 +11,14 @@ const FIRE_DAMAGE: f32 = 5.0;
 #[derive(Component, Reflect, Debug)]
 #[reflect(Component)]
 pub(crate) struct AppliesFire {
-    pub duration: Duration,
+    pub duration: f32,
     pub proc_chance: f64,
 }
 
 impl Default for AppliesFire {
     fn default() -> Self {
         Self {
-            duration: Duration::from_secs(2),
+            duration: 2.0,
             proc_chance: 0.0,
         }
     }
@@ -27,7 +27,7 @@ impl Default for AppliesFire {
 impl AppliesFire {
     pub fn new(proc_chance: f64) -> Self {
         Self {
-            duration: Duration::from_secs(2),
+            duration: 2.0,
             proc_chance,
         }
     }
@@ -70,7 +70,7 @@ fn start_fire_on_collision(
 
     commands.entity(hit_entity).trigger(OnDamageOverTime {
         damage: FIRE_DAMAGE,
-        duration: 2.0,
+        duration: fire.duration,
         interval: 0.5,
     });
 }
