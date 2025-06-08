@@ -1,3 +1,4 @@
+use crate::game::world::level_gen::Map;
 use crate::game::GameLayer;
 use crate::game::actor::ActorAssets;
 use crate::game::actor::camera_cutie::{CameraCutieEvent, send_camera_follow_event};
@@ -21,6 +22,8 @@ pub struct LevelAssets {
     hub_assets: Handle<TiledWorld>,
     #[asset(path = "maps/World_X.world")]
     x_assets: Handle<TiledWorld>,
+    #[asset(path = "maps/Dungeon.world")]
+    dungeon_assets: Handle<TiledWorld>,
 }
 
 impl Configure for LevelAssets {
@@ -58,8 +61,9 @@ pub fn spawn_world(
     actor_assets: Res<ActorAssets>,
     set_camera_event: EventWriter<CameraCutieEvent>,
 ) {
+    Map::shaped(5).save_world_file();
     commands.spawn((
-        TiledWorldHandle(world_assets.hub_assets.clone()),
+        TiledWorldHandle(world_assets.dungeon_assets.clone()),
         TilemapAnchor::Center,
         TiledWorldChunking::new(200., 200.),
         TiledMapLayerZOffset(5.),
