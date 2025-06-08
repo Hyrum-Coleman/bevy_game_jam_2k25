@@ -1,5 +1,4 @@
 use crate::game::actor::combat::health::Health;
-use crate::game::item::effects::life_steal::apply_lifesteal_on_damage;
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
@@ -19,11 +18,11 @@ impl Configure for Damage {
 #[derive(Event, Reflect, Debug)]
 pub struct OnDamage {
     pub damage: f32,
-    pub attacker: Entity,
+    pub attacker: Option<Entity>,
 }
 
 impl OnDamage {
-    pub fn new(damage: f32, attacker: Entity) -> Self {
+    pub fn new(damage: f32, attacker: Option<Entity>) -> Self {
         Self { damage, attacker }
     }
 }
@@ -55,5 +54,5 @@ fn deal_damage_on_collision(
     rq!(health_query.contains(hit_entity));
     commands
         .entity(hit_entity)
-        .trigger(OnDamage::new(damage.0, attacker));
+        .trigger(OnDamage::new(damage.0, Some(attacker)));
 }

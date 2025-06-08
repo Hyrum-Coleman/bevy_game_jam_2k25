@@ -15,7 +15,7 @@ impl Configure for OnHeal {
     }
 }
 
-fn apply_heal(mut trigger: Trigger<OnHeal>, mut health_query: Query<&mut Health>) {
+fn apply_heal(trigger: Trigger<OnHeal>, mut health_query: Query<&mut Health>) {
     let target = r!(trigger.get_target());
     let mut health = r!(health_query.get_mut(target));
     health.current += trigger.0;

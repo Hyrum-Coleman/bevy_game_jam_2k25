@@ -1,6 +1,4 @@
 use crate::prelude::*;
-use item::effects;
-
 pub mod actor;
 pub mod item;
 pub mod world;

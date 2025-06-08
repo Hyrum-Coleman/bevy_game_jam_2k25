@@ -1,6 +1,5 @@
 use crate::game::actor::combat::damage::OnDamage;
 use crate::game::actor::combat::heal::OnHeal;
-use crate::game::actor::combat::health::Health;
 use crate::prelude::*;
 
 pub(in crate::game) fn plugin(app: &mut App) {
@@ -31,12 +30,12 @@ impl Configure for OnLifeSteal {
 }
 
 pub fn apply_lifesteal_on_damage(
-    mut trigger: Trigger<OnDamage>,
+    trigger: Trigger<OnDamage>,
     mut commands: Commands,
-    mut parent_query: Query<&ChildOf>,
-    mut life_steal_query: Query<(&LifeSteal)>,
+    parent_query: Query<&ChildOf>,
+    life_steal_query: Query<&LifeSteal>,
 ) {
-    let target = trigger.attacker;
+    let target = rq!(trigger.attacker);
     let damage = trigger.damage;
 
     let parent = r!(parent_query.get(target)).parent();
