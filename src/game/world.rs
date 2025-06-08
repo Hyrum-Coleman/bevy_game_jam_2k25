@@ -2,7 +2,7 @@ use crate::game::GameLayer;
 use crate::game::actor::ActorAssets;
 use crate::game::actor::camera_cutie::{CameraCutieEvent, send_camera_follow_event};
 use crate::game::actor::enemy::get_enemy;
-use crate::game::actor::movement::spring::Spring;
+use crate::game::actor::movement::spring::mass_spring_damper;
 use crate::game::actor::player::get_player;
 use crate::game::world::level_gen::Map;
 use crate::prelude::*;
@@ -65,40 +65,25 @@ pub fn spawn_world(
     commands.spawn((
         TiledWorldHandle(world_assets.dungeon_assets.clone()),
         TilemapAnchor::Center,
-        TiledWorldChunking::new(200., 200.),
-        TiledMapLayerZOffset(5.),
+        TiledMapLayerZOffset(0.),
         RigidBody::Static,
         CollisionLayers::new(GameLayer::Wall, LayerMask::ALL),
-        Friction::default(),
         DespawnOnExitState::<Level>::default(),
     ));
 
-    let mut player_spawn_commands = commands.spawn((
+    let player_spawn_commands = commands.spawn((
         get_player(actor_assets.rat_handle.clone()),
-        Transform::from_xyz(64., 0., -1.),
+        Transform::from_xyz(64., 0., 5.),
         DespawnOnExitState::<Level>::default(),
     ));
-    player_spawn_commands.with_children(|children| {
-        children.spawn((
-            CollisionLayers::new(GameLayer::Player, LayerMask::ALL),
-            Collider::rectangle(32., 16.),
-            Transform::from_xyz(0.0, -24.0, 0.0),
-            ColliderDensity(5.0),
-        ));
-    });
 
     send_camera_follow_event(player_spawn_commands.id(), set_camera_event);
 
     commands.spawn((
         get_enemy("Orc", actor_assets.orc_image.clone()),
-        LinearDamping(4000.),
-        Mass(100.),
-        Spring::default()
-            .with_stiffness(40000.)
-            .with_offset(Vec2::new(-256., -128.)),
+        mass_spring_damper(100., 40_000., 4_000., Vec2::new(-256., -128.)),
         Transform::from_xyz(-256., -128., -2.),
         DespawnOnExitState::<Screen>::Recursive,
     ));
 }
-
 pub fn despawn() {}

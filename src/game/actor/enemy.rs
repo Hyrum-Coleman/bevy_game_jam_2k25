@@ -1,4 +1,5 @@
 use crate::game::GameLayer;
+use crate::game::actor::combat::health::Health;
 use crate::game::actor::create_entity_image;
 use crate::prelude::*;
 
@@ -20,6 +21,7 @@ pub fn get_enemy(name: &'static str, texture: Handle<Image>) -> impl Bundle {
     (
         Name::new(name),
         Enemy,
+        Health::new(10.),
         create_entity_image(texture),
         Collider::rectangle(32., 32.),
         CollisionLayers::new(GameLayer::Enemy, LayerMask::ALL),
