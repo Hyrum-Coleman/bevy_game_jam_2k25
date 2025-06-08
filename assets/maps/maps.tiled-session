@@ -1,5 +1,5 @@
 {
-    "activeFile": "",
+    "activeFile": "Dungeon/Medium/MapxxxL.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -91,6 +91,20 @@
         "Dungeon/Empty/map_xRBL.tmx#Town Tileset": {
             "scaleInDock": 1
         },
+        "Dungeon/Hall/MapxxxL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Hall/MapxxxL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Hall/MapxxxL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
         "Dungeon/Hall/map_TRBL.tmx": {
             "scale": 1.07171875,
             "selectedLayer": 0,
@@ -131,6 +145,20 @@
             "scaleInDock": 1
         },
         "Dungeon/Hall/map_xRBL.tmx#Town Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Medium/MapxxxL.tmx": {
+            "scale": 1.07171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 480.0699810467998,
+                "y": 319.580113719201
+            }
+        },
+        "Dungeon/Medium/MapxxxL.tmx#Dungeon Crawler Tileset": {
+            "scaleInDock": 1
+        },
+        "Dungeon/Medium/MapxxxL.tmx#Town Tileset": {
             "scaleInDock": 1
         },
         "Dungeon/Medium/map_TRBL.tmx": {
@@ -191,9 +219,13 @@
         }
     },
     "openFiles": [
+        "Dungeon/Medium/MapxxxL.tmx",
+        "Dungeon/Hall/MapxxxL.tmx"
     ],
     "project": "maps.tiled-project",
     "recentFiles": [
+        "Dungeon/Hall/MapxxxL.tmx",
+        "Dungeon/Medium/MapxxxL.tmx",
         "Dungeon/Hall/map_TxxL.tmx",
         "Dungeon/Hall/map_xRBL.tmx",
         "Dungeon/Hall/map_TRBL.tmx",
@@ -203,8 +235,6 @@
         "Courtyard/Empty/map_xRBL.tmx",
         "Dungeon/Empty/map_TxBx.tmx",
         "Dungeon/Medium/map_xRBL.tmx",
-        "Dungeon/RoomEmpty/map_TRBL.tmx",
-        "Dungeon/Empty/map_TRBL.tmx",
-        "Dungeon/Empty/map_TRxx.tmx"
+        "Dungeon/RoomEmpty/map_TRBL.tmx"
     ]
 }
