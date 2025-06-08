@@ -4,11 +4,15 @@ use crate::game::actor::camera_cutie::{CameraCutieEvent, send_camera_follow_even
 use crate::game::actor::enemy::get_enemy;
 use crate::game::actor::movement::spring::mass_spring_damper;
 use crate::game::actor::player::get_player;
+use crate::game::world::level_gen::Map;
 use crate::prelude::*;
 use crate::screen::Screen;
 
+pub mod level_gen;
+
 pub(super) fn plugin(app: &mut App) {
     app.configure::<(LevelAssets, Level)>();
+    app.add_plugins(level_gen::plugin);
 }
 
 #[derive(AssetCollection, Resource, Reflect, Default, Debug)]
@@ -16,8 +20,10 @@ pub(super) fn plugin(app: &mut App) {
 pub struct LevelAssets {
     #[asset(path = "maps/World_H.world")]
     hub_assets: Handle<TiledWorld>,
-    #[asset(path = "maps/empty_room_map_TRBL.tmx")]
-    x_assets: Handle<TiledMap>,
+    #[asset(path = "maps/World_X.world")]
+    x_assets: Handle<TiledWorld>,
+    #[asset(path = "maps/Dungeon.world")]
+    dungeon_assets: Handle<TiledWorld>,
 }
 
 impl Configure for LevelAssets {
@@ -55,18 +61,22 @@ pub fn spawn_world(
     actor_assets: Res<ActorAssets>,
     set_camera_event: EventWriter<CameraCutieEvent>,
 ) {
+    let map = Map::shaped(50);
+    map.save_world_file();
+    let y_offset = map.y_offset();
     commands.spawn((
-        TiledMapHandle(world_assets.x_assets.clone()),
-        TilemapAnchor::Center,
+        TiledWorldHandle(world_assets.dungeon_assets.clone()),
+        TilemapAnchor::None,
         TiledMapLayerZOffset(0.),
         RigidBody::Static,
         CollisionLayers::new(GameLayer::Wall, LayerMask::ALL),
         DespawnOnExitState::<Level>::default(),
+        Transform::from_xyz(0., y_offset, 0.),
     ));
 
     let player_spawn_commands = commands.spawn((
         get_player(actor_assets.rat_handle.clone()),
-        Transform::from_xyz(64., 0., 5.),
+        Transform::from_xyz(480., 320., 5.),
         DespawnOnExitState::<Level>::default(),
     ));
 
