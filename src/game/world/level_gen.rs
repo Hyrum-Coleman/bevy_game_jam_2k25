@@ -138,7 +138,7 @@ impl Map {
         let world_data = self.create_world_info();
         let world_type = self.world_type;
         let json = serde_json::to_string(&world_data).expect("Aaron Made Bad Struct");
-        std::fs::write(format!("assets/maps/{}", world_type), json).expect("File System Failed");
+        std::fs::write(format!("assets/maps/{}.world", world_type), json).expect("File System Failed");
     }
 }
 
