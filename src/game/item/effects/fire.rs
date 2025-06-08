@@ -57,7 +57,7 @@ fn start_fire_on_collision(
     mut sprite_query: Query<&mut Sprite>,
 ) {
     let attacker = r!(trigger.get_target());
-    let fire = r!(fire_query.get(attacker));
+    let fire = rq!(fire_query.get(attacker));
 
     rq!(thread_rng().gen_bool(fire.proc_chance));
 

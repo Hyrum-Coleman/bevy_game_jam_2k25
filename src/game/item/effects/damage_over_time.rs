@@ -53,7 +53,7 @@ pub fn apply_dot_on_damage(
 ) {
     let target = trigger.target();
     let attacker = rq!(trigger.attacker);
-    let dot = r!(dot_query.get(attacker));
+    let dot = rq!(dot_query.get(attacker));
 
     rq!(thread_rng().gen_bool(dot.proc_chance));
 

@@ -48,7 +48,7 @@ fn deal_damage_on_collision(
     health_query: Query<(), With<Health>>,
 ) {
     let attacker = r!(trigger.get_target());
-    let damage = r!(damage_query.get(attacker));
+    let damage = rq!(damage_query.get(attacker));
 
     let hit_entity = trigger.collider;
     rq!(health_query.contains(hit_entity));
