@@ -1,7 +1,6 @@
-use crate::game::GameLayer;
 use crate::game::actor::ActorAssets;
 use crate::game::actor::movement::MovementController;
-use crate::game::actor::player::{get_player_projectile, Player};
+use crate::game::actor::player::{Player, get_player_projectile};
 use crate::prelude::*;
 use std::f32::consts::PI;
 
@@ -38,7 +37,6 @@ impl Configure for PlayerAction {
 }
 
 fn record_movement_action(
-    mut commands: Commands,
     mut action_query: Query<(&ActionState<PlayerAction>, &mut MovementController)>,
 ) {
     for (action, mut controller) in &mut action_query {
