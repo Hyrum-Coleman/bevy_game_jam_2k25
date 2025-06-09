@@ -14,9 +14,9 @@ pub(super) fn plugin(app: &mut App) {
 #[derive(AssetCollection, Resource, Reflect, Default, Debug)]
 #[reflect(Resource)]
 pub struct LevelAssets {
-    #[asset(path = "maps/World_H.world")]
+    #[asset(path = "maps/Dungeon.world")]
     hub_assets: Handle<TiledWorld>,
-    #[asset(path = "maps/empty_room_map_TRBL.tmx")]
+    #[asset(path = "maps/World_H/World_H_Center.tmx")]
     x_assets: Handle<TiledMap>,
 }
 
@@ -56,8 +56,8 @@ pub fn spawn_world(
     set_camera_event: EventWriter<CameraCutieEvent>,
 ) {
     commands.spawn((
-        TiledMapHandle(world_assets.x_assets.clone()),
-        TilemapAnchor::Center,
+        TiledWorldHandle(world_assets.hub_assets.clone()),
+        TilemapAnchor::None,
         TiledMapLayerZOffset(0.),
         RigidBody::Static,
         CollisionLayers::new(GameLayer::Wall, LayerMask::ALL),
