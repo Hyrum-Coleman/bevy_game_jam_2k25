@@ -64,7 +64,7 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
             ColliderDensity(5.0),
             CollisionEventsEnabled,
         )],
-        create_entity_aseprite(texture),
+        create_entity_aseprite(texture, "Idle"),
     )
 }
 

@@ -48,11 +48,11 @@ impl Configure for ActorAssets {
     }
 }
 
-fn create_entity_aseprite(sprite: Handle<Aseprite>) -> impl Bundle {
+fn create_entity_aseprite(sprite: Handle<Aseprite>, tag: &str) -> impl Bundle {
     (
         AseAnimation {
             aseprite: sprite,
-            animation: Animation::tag("Idle")
+            animation: Animation::tag(tag)
                 .with_repeat(AnimationRepeat::Loop)
                 .with_speed(1.75),
         },

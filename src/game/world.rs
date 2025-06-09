@@ -1,7 +1,7 @@
 use crate::game::GameLayer;
 use crate::game::actor::ActorAssets;
 use crate::game::actor::camera_cutie::{CameraCutieEvent, send_camera_follow_event};
-use crate::game::actor::enemy::get_enemy;
+use crate::game::actor::enemy::{get_enemy, get_enemy_aseprite};
 use crate::game::actor::movement::spring::mass_spring_damper;
 use crate::game::actor::player::get_player;
 use crate::prelude::*;
@@ -66,7 +66,7 @@ pub fn spawn_world(
 
     let player_spawn_commands = commands.spawn((
         get_player(actor_assets.rat_handle.clone()),
-        Transform::from_xyz(64., 0., 5.),
+        Transform::from_xyz(475., 330., 5.),
         DespawnOnExitState::<Level>::default(),
     ));
 
@@ -74,9 +74,51 @@ pub fn spawn_world(
 
     commands.spawn((
         get_enemy("Orc", actor_assets.orc_image.clone()),
-        mass_spring_damper(500., 1_000_000., 20_000., Vec2::new(-256., -128.)),
-        Transform::from_xyz(-256., -128., -2.),
+        mass_spring_damper(500., 1_000_000., 20_000., Vec2::new(212., 463.)),
+        Transform::from_xyz(212., 463., 5.),
         DespawnOnExitState::<Screen>::Recursive,
     ));
+
+    commands.spawn((
+        get_enemy_aseprite(
+            "Blob Cannon",
+            actor_assets.cannon.clone(),
+            "Idle",
+            100.,
+            32.,
+        ),
+        Transform::from_xyz(212., 420., 5.),
+        DespawnOnExitState::<Screen>::Recursive,
+    ));
+
+    commands.spawn((
+        get_enemy_aseprite(
+            "Mouse Boss",
+            actor_assets.mouse_boss.clone(),
+            "Move Down",
+            400.,
+            96.,
+        ),
+        Transform::from_xyz(200., 600., 5.),
+        DespawnOnExitState::<Screen>::Recursive,
+    ));
+
+    commands.spawn((
+        get_enemy_aseprite("Mouse", actor_assets.mouse.clone(), "Move Down", 25., 32.),
+        Transform::from_xyz(200., 640., 5.),
+        DespawnOnExitState::<Screen>::Recursive,
+    ));
+
+    // commands.spawn((
+    //     get_enemy_aseprite(
+    //         "Cheese Item",
+    //         actor_assets.exp_cheese.clone(),
+    //         "Frame",
+    //         15.,
+    //         16.,
+    //     ),
+    //     Transform::from_xyz(400., 463., 5.),
+    //     DespawnOnExitState::<Screen>::Recursive,
+    // ));
 }
 pub fn despawn() {}

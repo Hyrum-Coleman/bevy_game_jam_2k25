@@ -1,6 +1,6 @@
 use crate::game::GameLayer;
 use crate::game::actor::combat::health::Health;
-use crate::game::actor::create_entity_image;
+use crate::game::actor::{create_entity_aseprite, create_entity_image};
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
@@ -24,6 +24,25 @@ pub fn get_enemy(name: &'static str, texture: Handle<Image>) -> impl Bundle {
         Health::new(100.),
         create_entity_image(texture),
         Collider::rectangle(32., 32.),
+        CollisionLayers::new(GameLayer::Enemy, LayerMask::ALL),
+        ExternalForce::new(Vec2::ZERO).with_persistence(false),
+        Restitution::new(0.75),
+    )
+}
+
+pub fn get_enemy_aseprite(
+    name: &'static str,
+    texture: Handle<Aseprite>,
+    tag: &str,
+    health: f32,
+    length: f32,
+) -> impl Bundle {
+    (
+        Name::new(name),
+        Enemy,
+        Health::new(health),
+        create_entity_aseprite(texture, tag),
+        Collider::rectangle(length, length),
         CollisionLayers::new(GameLayer::Enemy, LayerMask::ALL),
         ExternalForce::new(Vec2::ZERO).with_persistence(false),
         Restitution::new(0.75),
