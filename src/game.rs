@@ -13,6 +13,6 @@ pub enum GameLayer {
     Default,
     Player,
     Enemy,
-    _Projectile,
+    Projectile,
     Wall,
 }

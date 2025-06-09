@@ -1,4 +1,4 @@
-use super::movement::input::MovementAction;
+use super::movement::input::PlayerAction;
 use crate::game::GameLayer;
 use crate::game::actor::combat::damage::Damage;
 use crate::game::actor::combat::health::Health;
@@ -57,8 +57,10 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
         ),
         MovementController::default(),
         InputMap::default()
-            .with_dual_axis(MovementAction::Move, GamepadStick::LEFT)
-            .with_dual_axis(MovementAction::Move, VirtualDPad::wasd()),
+            .with_dual_axis(PlayerAction::Move, GamepadStick::LEFT)
+            .with_dual_axis(PlayerAction::Move, VirtualDPad::wasd())
+            .with(PlayerAction::Shoot, MouseButton::Left)
+            .with(PlayerAction::Dash, KeyCode::ShiftLeft),
         children![(
             Name::new("Player Collider"),
             CollisionLayers::new(GameLayer::Player, LayerMask::ALL),
