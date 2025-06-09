@@ -15,7 +15,7 @@ pub struct DealsDamageOverTime {
 }
 
 impl DealsDamageOverTime {
-    pub fn new(proc_chance: f64, damage: f32, duration: f32, interval: f32) -> Self {
+    pub fn _new(proc_chance: f64, damage: f32, duration: f32, interval: f32) -> Self {
         Self {
             proc_chance,
             damage,
