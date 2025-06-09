@@ -5,6 +5,7 @@ use crate::game::actor::movement::MovementController;
 use crate::game::actor::player::Player;
 use crate::game::world::Level;
 use crate::prelude::*;
+use std::f32::consts::PI;
 
 pub(super) fn plugin(app: &mut App) {
     app.configure::<PlayerAction>();
@@ -60,27 +61,35 @@ fn spawn_projectile(
         let window_center = vec2(window.width() / 2.0, window.height() / 2.0);
 
         let trajectory = mouse_position - window_center;
-        let clamped_traj = trajectory.clamp_length_max(1.0);
-        info!("Trajectory: {}", trajectory);
-        info!("Clamped Traj: {}", clamped_traj);
-
+        let clamped_traj = trajectory.clamp_length_max(1.0).normalize();
         let player_position = r!(player_query.single());
+
+        let bounded_angle = f32::atan(trajectory.x / trajectory.y);
+        let angle = if trajectory.y > 0.0 {
+            bounded_angle + PI
+        } else {
+            bounded_angle
+        };
 
         commands.spawn((
             Name::new("Projectile"),
-            Transform::from_xyz(
-                player_position.x + clamped_traj.x * 35.0,
-                player_position.y - clamped_traj.y * 35.0,
-                5.0,
-            ),
             RigidBody::Dynamic,
             AseAnimation {
                 aseprite: assets.projectile_image.clone(),
                 animation: Animation::from("Idle"),
             },
             Damage(5.),
-            Sprite {..default()},
-            LinearVelocity(vec2(500.0 * clamped_traj.x, -500.0 * clamped_traj.y)),
+            Sprite { ..default() },
+            Transform {
+                translation: vec3(
+                    player_position.x + clamped_traj.x * 35.0,
+                    player_position.y - clamped_traj.y * 35.0,
+                    5.0,
+                ),
+                rotation: Quat::from_rotation_z(angle),
+                scale: Vec3::ONE,
+            },
+            LinearVelocity(vec2(50.0 * clamped_traj.x, -50.0 * clamped_traj.y)),
             Collider::capsule(5.0, 5.0),
             CollisionLayers::new(GameLayer::Projectile, LayerMask::ALL),
             DespawnOnExitState::<Level>::Recursive,
@@ -88,6 +97,4 @@ fn spawn_projectile(
     });
 }
 
-fn despawn_shot_on_collision() {
-
-}
+fn despawn_shot_on_collision() {}
