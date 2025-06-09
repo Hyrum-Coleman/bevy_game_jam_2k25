@@ -4,10 +4,8 @@ use crate::game::actor::combat::damage::Damage;
 use crate::game::actor::combat::health::Health;
 use crate::game::actor::create_entity_aseprite;
 use crate::game::actor::movement::{Movement, MovementController};
-use crate::game::item::effects::damage_over_time::DealsDamageOverTime;
 use crate::game::item::effects::fire::AppliesFire;
-use crate::game::item::effects::life_steal::LifeSteal;
-use crate::game::item::effects::poison::AppliesPoison;
+use crate::game::world::Level;
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
@@ -45,10 +43,6 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
             max: 500.,
             current: 100.,
         },
-        LifeSteal {
-            proc_percent: 1.,
-            steal_percent: 0.5,
-        },
         Movement::new(
             ACCELERATION_RATE_PIXELS,
             DECELERATION_RATE_PIXELS,
@@ -68,11 +62,41 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
             Transform::from_xyz(0.0, -24.0, 0.0),
             ColliderDensity(5.0),
             CollisionEventsEnabled,
-            AppliesFire::new(1.0),
-            AppliesPoison::new(1.0),
-            DealsDamageOverTime::new(1., 5., 5., 0.5),
-            Damage(5.),
         )],
         create_entity_aseprite(texture),
+    )
+}
+
+
+pub fn get_player_projectile(
+    sprite: Handle<Aseprite>,
+    trajectory: Vec2,
+    angle: f32,
+    player_offset: Vec2,
+) -> impl Bundle {
+    (
+        Name::new("Projectile"),
+        RigidBody::Dynamic,
+        AseAnimation {
+            aseprite: sprite,
+            animation: Animation::from("Idle"),
+        },
+        Damage(5.),
+        Sprite { ..default() },
+        Transform {
+            translation: vec3(
+                player_offset.x + trajectory.x * 35.0,
+                player_offset.y - trajectory.y * 35.0,
+                5.0,
+            ),
+            rotation: Quat::from_rotation_z(angle),
+            scale: Vec3::ONE,
+        },
+        LinearVelocity(vec2(500.0 * trajectory.x, -500.0 * trajectory.y)),
+        Collider::capsule(5.0, 5.0),
+        CollisionLayers::new(GameLayer::Projectile, LayerMask::ALL),
+        CollisionEventsEnabled,
+        AppliesFire::new(0.5),
+        DespawnOnExitState::<Level>::Recursive,
     )
 }

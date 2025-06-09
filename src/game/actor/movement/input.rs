@@ -1,12 +1,9 @@
 use crate::game::GameLayer;
 use crate::game::actor::ActorAssets;
-use crate::game::actor::combat::damage::Damage;
 use crate::game::actor::movement::MovementController;
-use crate::game::actor::player::Player;
-use crate::game::world::Level;
+use crate::game::actor::player::{get_player_projectile, Player};
 use crate::prelude::*;
 use std::f32::consts::PI;
-use crate::game::item::effects::fire::AppliesFire;
 
 pub(super) fn plugin(app: &mut App) {
     app.configure::<PlayerAction>();
@@ -73,36 +70,20 @@ fn spawn_projectile(
             bounded_angle
         };
 
-        commands.spawn((
-            Name::new("Projectile"),
-            RigidBody::Dynamic,
-            AseAnimation {
-                aseprite: assets.projectile_image.clone(),
-                animation: Animation::from("Idle"),
-            },
-            Damage(5.),
-            Sprite { ..default() },
-            Transform {
-                translation: vec3(
-                    player_position.x + clamped_traj.x * 35.0,
-                    player_position.y - clamped_traj.y * 35.0,
-                    5.0,
-                ),
-                rotation: Quat::from_rotation_z(angle),
-                scale: Vec3::ONE,
-            },
-            LinearVelocity(vec2(500.0 * clamped_traj.x, -500.0 * clamped_traj.y)),
-            Collider::capsule(5.0, 5.0),
-            CollisionLayers::new(GameLayer::Projectile, LayerMask::ALL),
-            CollisionEventsEnabled,
-            AppliesFire::new(0.5),
-            DespawnOnExitState::<Level>::Recursive,
-
+        commands.spawn(get_player_projectile(
+            assets.projectile_image.clone(),
+            clamped_traj,
+            angle,
+            player_position.0,
         ));
     });
 }
 
-fn despawn_shot_on_collision(trigger: Trigger<OnCollisionStart>, name_query: Query<&Name>, mut commands: Commands) {
+fn despawn_shot_on_collision(
+    trigger: Trigger<OnCollisionStart>,
+    name_query: Query<&Name>,
+    mut commands: Commands,
+) {
     let projectile = r!(trigger.get_target());
     let name = r!(name_query.get(projectile));
 
