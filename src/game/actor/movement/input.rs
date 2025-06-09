@@ -6,6 +6,7 @@ use crate::game::actor::player::Player;
 use crate::game::world::Level;
 use crate::prelude::*;
 use std::f32::consts::PI;
+use crate::game::item::effects::fire::AppliesFire;
 
 pub(super) fn plugin(app: &mut App) {
     app.configure::<PlayerAction>();
@@ -94,6 +95,7 @@ fn spawn_projectile(
             Collider::capsule(5.0, 5.0),
             CollisionLayers::new(GameLayer::Projectile, LayerMask::ALL),
             CollisionEventsEnabled,
+            AppliesFire::new(0.5),
             DespawnOnExitState::<Level>::Recursive,
 
         ));
