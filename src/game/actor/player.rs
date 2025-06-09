@@ -67,7 +67,6 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
     )
 }
 
-
 pub fn get_player_projectile(
     sprite: Handle<Aseprite>,
     trajectory: Vec2,
@@ -86,7 +85,7 @@ pub fn get_player_projectile(
         Transform {
             translation: vec3(
                 player_offset.x + trajectory.x * 35.0,
-                player_offset.y - trajectory.y * 35.0,
+                player_offset.y - trajectory.y * 64.0,
                 5.0,
             ),
             rotation: Quat::from_rotation_z(angle),
