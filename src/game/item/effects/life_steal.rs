@@ -38,7 +38,7 @@ pub fn apply_lifesteal_on_damage(
     let target = rq!(trigger.attacker);
     let damage = trigger.damage;
 
-    let parent = r!(parent_query.get(target)).parent();
+    let parent = rq!(parent_query.get(target)).parent();
 
     let life_steal = rq!(life_steal_query.get(parent));
 

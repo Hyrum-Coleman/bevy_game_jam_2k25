@@ -35,6 +35,7 @@ impl Configure for PlayerAction {
                     .run_if(input_just_pressed(MouseButton::Left)),
             ),
         );
+        app.add_observer(despawn_shot_on_collision);
     }
 }
 
@@ -89,12 +90,21 @@ fn spawn_projectile(
                 rotation: Quat::from_rotation_z(angle),
                 scale: Vec3::ONE,
             },
-            LinearVelocity(vec2(50.0 * clamped_traj.x, -50.0 * clamped_traj.y)),
+            LinearVelocity(vec2(500.0 * clamped_traj.x, -500.0 * clamped_traj.y)),
             Collider::capsule(5.0, 5.0),
             CollisionLayers::new(GameLayer::Projectile, LayerMask::ALL),
+            CollisionEventsEnabled,
             DespawnOnExitState::<Level>::Recursive,
+
         ));
     });
 }
 
-fn despawn_shot_on_collision() {}
+fn despawn_shot_on_collision(trigger: Trigger<OnCollisionStart>, name_query: Query<&Name>, mut commands: Commands) {
+    let projectile = r!(trigger.get_target());
+    let name = r!(name_query.get(projectile));
+
+    if name.as_str() == "Projectile" {
+        commands.entity(projectile).despawn();
+    }
+}
