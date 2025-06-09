@@ -5,6 +5,7 @@ use crate::game::actor::combat::health::Health;
 use crate::game::actor::create_entity_aseprite;
 use crate::game::actor::movement::{Movement, MovementController};
 use crate::game::item::effects::fire::AppliesFire;
+use crate::game::item::effects::poison::AppliesPoison;
 use crate::game::world::Level;
 use crate::prelude::*;
 
@@ -96,6 +97,7 @@ pub fn get_player_projectile(
         CollisionLayers::new(GameLayer::Projectile, LayerMask::ALL),
         CollisionEventsEnabled,
         AppliesFire::new(0.5),
+        AppliesPoison::new(0.2),
         DespawnOnExitState::<Level>::Recursive,
     )
 }
