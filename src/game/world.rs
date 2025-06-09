@@ -104,21 +104,21 @@ pub fn spawn_world(
     ));
 
     commands.spawn((
-        get_enemy_aseprite("Mouse", actor_assets.mouse.clone(), "Move Down", 25., 32.),
-        Transform::from_xyz(200., 640., 5.),
+        get_enemy_aseprite("Mouse", actor_assets.mouse.clone(), "move down", 25., 32.),
+        Transform::from_xyz(200., 100., 5.),
         DespawnOnExitState::<Screen>::Recursive,
     ));
 
-    // commands.spawn((
-    //     get_enemy_aseprite(
-    //         "Cheese Item",
-    //         actor_assets.exp_cheese.clone(),
-    //         "Frame",
-    //         15.,
-    //         16.,
-    //     ),
-    //     Transform::from_xyz(400., 463., 5.),
-    //     DespawnOnExitState::<Screen>::Recursive,
-    // ));
+    commands.spawn((
+        get_enemy_aseprite(
+            "Cheese Item",
+            actor_assets.exp_cheese.clone(),
+            "Frame",
+            15.,
+            16.,
+        ),
+        Transform::from_xyz(400., 463., 5.),
+        DespawnOnExitState::<Screen>::Recursive,
+    ));
 }
 pub fn despawn() {}
