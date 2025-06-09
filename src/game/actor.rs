@@ -30,6 +30,14 @@ pub struct ActorAssets {
     pub rat_handle: Handle<Aseprite>,
     #[asset(path = "image/Pellet.aseprite")]
     pub projectile_image: Handle<Aseprite>,
+    #[asset(path = "image/Items/Extra_Protein_Cheese.aseprite")]
+    pub exp_cheese: Handle<Aseprite>,
+    #[asset(path = "image/Enemies/Mouse.aseprite")]
+    pub mouse: Handle<Aseprite>,
+    #[asset(path = "image/Enemies/Mouse_Boss.aseprite")]
+    pub mouse_boss: Handle<Aseprite>,
+    #[asset(path = "image/Enemies/Blob_Cannon.aseprite")]
+    pub cannon: Handle<Aseprite>,
 }
 
 impl Configure for ActorAssets {
