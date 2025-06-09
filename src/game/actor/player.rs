@@ -1,8 +1,12 @@
-use super::movement::input::MovementAction;
+use super::movement::input::PlayerAction;
 use crate::game::GameLayer;
 use crate::game::actor::combat::damage::Damage;
+use crate::game::actor::combat::health::Health;
 use crate::game::actor::create_entity_aseprite;
 use crate::game::actor::movement::{Movement, MovementController};
+use crate::game::item::effects::fire::AppliesFire;
+use crate::game::item::effects::poison::AppliesPoison;
+use crate::game::world::Level;
 use crate::prelude::*;
 
 pub(super) fn plugin(app: &mut App) {
@@ -36,6 +40,10 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
     (
         Name::new("Player"),
         Player,
+        Health {
+            max: 500.,
+            current: 100.,
+        },
         Movement::new(
             ACCELERATION_RATE_PIXELS,
             DECELERATION_RATE_PIXELS,
@@ -44,8 +52,10 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
         ),
         MovementController::default(),
         InputMap::default()
-            .with_dual_axis(MovementAction::Move, GamepadStick::LEFT)
-            .with_dual_axis(MovementAction::Move, VirtualDPad::wasd()),
+            .with_dual_axis(PlayerAction::Move, GamepadStick::LEFT)
+            .with_dual_axis(PlayerAction::Move, VirtualDPad::wasd())
+            .with(PlayerAction::Shoot, MouseButton::Left)
+            .with(PlayerAction::Dash, KeyCode::ShiftLeft),
         children![(
             Name::new("Player Collider"),
             CollisionLayers::new(GameLayer::Player, LayerMask::ALL),
@@ -53,8 +63,41 @@ pub fn get_player(texture: Handle<Aseprite>) -> impl Bundle {
             Transform::from_xyz(0.0, -24.0, 0.0),
             ColliderDensity(5.0),
             CollisionEventsEnabled,
-            Damage(5.),
         )],
         create_entity_aseprite(texture),
+    )
+}
+
+pub fn get_player_projectile(
+    sprite: Handle<Aseprite>,
+    trajectory: Vec2,
+    angle: f32,
+    player_offset: Vec2,
+) -> impl Bundle {
+    (
+        Name::new("Projectile"),
+        RigidBody::Dynamic,
+        AseAnimation {
+            aseprite: sprite,
+            animation: Animation::from("Idle"),
+        },
+        Damage(5.),
+        Sprite { ..default() },
+        Transform {
+            translation: vec3(
+                player_offset.x + trajectory.x * 35.0,
+                player_offset.y - trajectory.y * 64.0,
+                5.0,
+            ),
+            rotation: Quat::from_rotation_z(angle),
+            scale: Vec3::ONE,
+        },
+        LinearVelocity(vec2(500.0 * trajectory.x, -500.0 * trajectory.y)),
+        Collider::capsule(5.0, 5.0),
+        CollisionLayers::new(GameLayer::Projectile, LayerMask::ALL),
+        CollisionEventsEnabled,
+        AppliesFire::new(0.5),
+        AppliesPoison::new(0.2),
+        DespawnOnExitState::<Level>::Recursive,
     )
 }

@@ -28,6 +28,8 @@ pub struct ActorAssets {
     pub orc_image: Handle<Image>,
     #[asset(path = "image/Rat_Base.aseprite")]
     pub rat_handle: Handle<Aseprite>,
+    #[asset(path = "image/Pellet.aseprite")]
+    pub projectile_image: Handle<Aseprite>,
 }
 
 impl Configure for ActorAssets {

@@ -21,7 +21,7 @@ pub fn get_enemy(name: &'static str, texture: Handle<Image>) -> impl Bundle {
     (
         Name::new(name),
         Enemy,
-        Health::new(10.),
+        Health::new(100.),
         create_entity_image(texture),
         Collider::rectangle(32., 32.),
         CollisionLayers::new(GameLayer::Enemy, LayerMask::ALL),

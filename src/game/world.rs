@@ -74,7 +74,7 @@ pub fn spawn_world(
 
     commands.spawn((
         get_enemy("Orc", actor_assets.orc_image.clone()),
-        mass_spring_damper(100., 40_000., 4_000., Vec2::new(-256., -128.)),
+        mass_spring_damper(500., 1_000_000., 20_000., Vec2::new(-256., -128.)),
         Transform::from_xyz(-256., -128., -2.),
         DespawnOnExitState::<Screen>::Recursive,
     ));
